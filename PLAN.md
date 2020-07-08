@@ -1,4 +1,4 @@
-# Are We There Yet?
+# <img src="https://raw.githubusercontent.com/AndyObtiva/are-we-there-yet/master/are-we-there-yet-logo.svg" height=40 /> Are We There Yet?
 
 ## Background
 
@@ -63,4 +63,4 @@ Are We There Yet? is a simple tool that gives a quick "at a glance" view of mult
 
 [MIT License](LICENSE.txt)
 
-Copyright (c) 2020 Are We There Yet? - Andy Maleh
+Copyright (c) 2020 Are We There Yet? - [Andy Maleh](https://github.com/AndyObtiva)
