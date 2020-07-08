@@ -62,4 +62,4 @@ Are We There Yet? is a simple tool that gives a quick "at a glance" view of mult
 
 [MIT License](LICENSE.txt)
 
-Copyright (c) 2020 Are We There Yet?
+Copyright (c) 2020 Are We There Yet? - Andy Maleh
