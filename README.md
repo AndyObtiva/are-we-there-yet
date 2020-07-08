@@ -9,7 +9,7 @@
 
 [MIT License](LICENSE.txt)
 
-Copyright (c) 2020 - Are We There Yet? - [Andy Maleh](https://github.com/AndyObtiva)
+Copyright (c) 2020 - Are We There Yet? by [Andy Maleh](https://github.com/AndyObtiva)
 
 --
 
