@@ -1,5 +1,5 @@
 # Are We There Yet?
-## A tool to help you know when your personal projects will finish
+## A tool to help you know when your small projects will finish
 
 ### Initial Plan
 
