@@ -5,6 +5,12 @@
 
 [PLAN.md](PLAN.md)
 
+## License
+
+[MIT License](LICENSE.txt)
+
+Copyright (c) 2020 Are We There Yet? - [Andy Maleh](https://github.com/AndyObtiva)
+
 --
 
 Built with [Glimmer](https://github.com/AndyObtiva/glimmer) (Ruby Desktop Development GUI Library).
