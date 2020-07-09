@@ -1,12 +1,13 @@
 $LOAD_PATH.unshift(File.expand_path('..', __FILE__))
-$LOAD_PATH.unshift(File.expand_path('../../db', __FILE__))
+$LOAD_PATH.unshift(File.expand_path('../..', __FILE__))
 
 require 'puts_debuggerer'
 require 'bundler/setup'
 Bundler.require
 
-require 'db'
+require 'db/db'
 ActiveSupport::Dependencies.unhook!
+require 'vendor/nebula/org.eclipse.nebula.widgets.ganttchart_1.0.0.jar'
 require 'views/are_we_there_yet/app_view'
 
 class AreWeThereYet

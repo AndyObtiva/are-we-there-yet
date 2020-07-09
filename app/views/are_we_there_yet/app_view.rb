@@ -1,5 +1,10 @@
 require 'models/are_we_there_yet/task'
 
+java_import 'java.util.Calendar'
+
+java_import 'org.eclipse.nebula.widgets.ganttchart.GanttChart'
+java_import 'org.eclipse.nebula.widgets.ganttchart.GanttEvent'
+
 class AreWeThereYet
   class AppView
     include Glimmer::UI::CustomShell
@@ -29,9 +34,27 @@ class AreWeThereYet
 
     ## Use after_body block to setup observers for widgets in body
     #
-    # after_body {
-    # 
-    # }
+    after_body {
+      sdEventOne = Calendar.getInstance();
+      edEventOne = Calendar.getInstance();
+      edEventOne.add(Calendar::DATE, 10); 
+      
+      sdEventTwo = Calendar.getInstance();
+      edEventTwo = Calendar.getInstance();
+      sdEventTwo.add(Calendar::DATE, 11);
+      edEventTwo.add(Calendar::DATE, 15);
+      
+      cpDate = Calendar.getInstance();
+      cpDate.add(Calendar::DATE, 16);
+      
+      eventOne = GanttEvent.new(@gantt_chart.swt_widget, "Scope Event 1", sdEventOne, edEventOne, 35);		
+      eventTwo = GanttEvent.new(@gantt_chart.swt_widget, "Scope Event 2", sdEventTwo, edEventTwo, 10);		
+      eventThree = GanttEvent.new(@gantt_chart.swt_widget, "Checkpoint", cpDate, cpDate, 75);
+      eventThree.setCheckpoint(true);
+      
+      @gantt_chart.swt_widget.addConnection(eventOne, eventTwo);
+      @gantt_chart.swt_widget.addConnection(eventTwo, eventThree);		         
+    }
 
     ## Add widget content inside custom shell body
     ## Top-most widget must be a shell or another custom shell
@@ -47,115 +70,127 @@ class AreWeThereYet
           horizontal_spacing 5
           vertical_spacing 5
         }
-        composite {
-          grid_layout 6, true
+        sash_form(:vertical) {
+          layout_data(:fill, :fill, true, true)
           composite {
-            layout_data(:fill, :fill, true, true) {
-              width_hint 115
-            }
-            fill_layout :vertical
-            label {
-              text 'Task'
-            }
-            text {              
-            }
-          }
-          composite {
-            layout_data(:fill, :fill, true, true) {
-              width_hint 115
-            }
-            fill_layout :vertical
-            label {
-              text 'Project'
-            }
-            text {              
-            }
-          }
-          composite {
-            layout_data(:fill, :fill, true, true) {
-              width_hint 115
-            }
-            fill_layout :vertical
-            label {
-              text 'Type'
-            }
-            text {              
-            }
-          }
-          composite {
-            layout_data(:fill, :fill, true, true) {
-              width_hint 115
-            }
-            fill_layout :vertical
-            label {
-              text 'Start Date/Time'
-            }
-            text {              
-            }
-          }
-          composite {
-            layout_data(:fill, :fill, true, true) {
-              width_hint 115
-            }
-            fill_layout :vertical
-            label {
-              text 'Duration'
-            }
-            text {              
-            }
-          }
-          composite {
-            layout_data(:fill, :fill, true, true) {
-              width_hint 115  
-            }
-            fill_layout :vertical
-            label {
-              text 'Priority'
-            }
-            text {
-              on_key_pressed { |event|
-                if event.keyCode == swt(:cr)
-                  AreWeThereYet::Task.create!(
-                    project_name: 'MVP',
-                    name:         "Create task",
-                    task_type:    'Development',
-                    start_at:     Time.now,
-                    duration:     3,
-                    priority:     'High',
-                    position:     3
-                  )
-                end
+            @gantt_chart = gantt_chart {
+              layout_data(:fill, :fill, true, true) {
+                minimum_height 200
               }
             }
           }
-        }
-        table {
-          layout_data :fill, :fill, true, true
-          table_column {
-            text 'Task'
-            width 120
+          composite {
+            composite {
+              grid_layout 6, true
+              composite {
+                layout_data(:fill, :fill, true, true) {
+                  width_hint 115
+                }
+                fill_layout :vertical
+                label {
+                  text 'Task'
+                }
+                text {              
+                }
+              }
+              composite {
+                layout_data(:fill, :fill, true, true) {
+                  width_hint 115
+                }
+                fill_layout :vertical
+                label {
+                  text 'Project'
+                }
+                text {              
+                }
+              }
+              composite {
+                layout_data(:fill, :fill, true, true) {
+                  width_hint 115
+                }
+                fill_layout :vertical
+                label {
+                  text 'Type'
+                }
+                text {              
+                }
+              }
+              composite {
+                layout_data(:fill, :fill, true, true) {
+                  width_hint 115
+                }
+                fill_layout :vertical
+                label {
+                  text 'Start Date/Time'
+                }
+                text {              
+                }
+              }
+              composite {
+                layout_data(:fill, :fill, true, true) {
+                  width_hint 115
+                }
+                fill_layout :vertical
+                label {
+                  text 'Duration'
+                }
+                text {              
+                }
+              }
+              composite {
+                layout_data(:fill, :fill, true, true) {
+                  width_hint 115  
+                }
+                fill_layout :vertical
+                label {
+                  text 'Priority'
+                }
+                text {
+                  on_key_pressed { |event|
+                    if event.keyCode == swt(:cr)
+                      AreWeThereYet::Task.create!(
+                        project_name: 'MVP',
+                        name:         "Create task",
+                        task_type:    'Development',
+                        start_at:     Time.now,
+                        duration:     3,
+                        priority:     'High',
+                        position:     3
+                      )
+                    end
+                  }
+                }
+              }
+            }
+            table {
+              layout_data :fill, :fill, true, true
+              table_column {
+                text 'Task'
+                width 120
+              }
+              table_column {
+                text 'Project'
+                width 120
+              }
+              table_column {
+                text 'Type'
+                width 120
+              }
+              table_column {
+                text 'Start Date/Time'
+                width 120
+              }
+              table_column {
+                text 'Duration (hours)'
+                width 120
+              }
+              table_column {
+                text 'Priority'
+                width 120
+              }
+              items bind(Task, :all, on_read: :to_a), column_properties(:name, :project_name, :task_type, :start_at, :duration, :priority)
+            }
           }
-          table_column {
-            text 'Project'
-            width 120
-          }
-          table_column {
-            text 'Type'
-            width 120
-          }
-          table_column {
-            text 'Start Date/Time'
-            width 120
-          }
-          table_column {
-            text 'Duration (hours)'
-            width 120
-          }
-          table_column {
-            text 'Priority'
-            width 120
-          }
-          items bind(Task, :all, on_read: :to_a), column_properties(:name, :project_name, :task_type, :start_at, :duration, :priority)
         }
       }
     }
