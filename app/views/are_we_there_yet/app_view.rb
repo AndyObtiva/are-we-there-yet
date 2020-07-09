@@ -1,4 +1,4 @@
-require 'models/are_we_there_yet/task_repository'
+require 'models/are_we_there_yet/task'
 
 class AreWeThereYet
   class AppView
@@ -68,7 +68,7 @@ class AreWeThereYet
             text 'Priority'
             width 80
           }
-          items bind(TaskRepository.instance, :all) {|obj| pd obj}, column_properties(:name, :project_name, :task_type, :start_at, :duration, :priority)
+          items bind(Task, :all, on_read: :to_a), column_properties(:name, :project_name, :task_type, :start_at, :duration, :priority)
         }
       }
     }
