@@ -9,7 +9,7 @@ class AreWeThereYet
     # options :title, :background_color
     # option :width, default: 320
     # option :height, default: 240
-    option :greeting, default: 'Hello, World!'
+#     option :greeting, default: 'Hello, World!'
 
     ## Use before_body block to pre-initialize variables to use in body
     #
@@ -22,7 +22,7 @@ class AreWeThereYet
           display_about_dialog
         }
         on_preferences {
-          display_preferences_dialog
+#           display_preferences_dialog
         }
       }
     }
@@ -46,27 +46,27 @@ class AreWeThereYet
           layout_data :fill, :fill, true, true
           table_column {
             text 'Task'
-            width 80
+            width 120
           }
           table_column {
             text 'Project'
-            width 80
+            width 120
           }
           table_column {
             text 'Type'
-            width 80
+            width 120
           }
           table_column {
             text 'Start Date/Time'
-            width 80
+            width 120
           }
           table_column {
             text 'Duration (hours)'
-            width 80
+            width 120
           }
           table_column {
             text 'Priority'
-            width 80
+            width 120
           }
           items bind(Task, :all, on_read: :to_a), column_properties(:name, :project_name, :task_type, :start_at, :duration, :priority)
         }
