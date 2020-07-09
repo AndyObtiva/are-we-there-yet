@@ -14,5 +14,9 @@ class AreWeThereYet
     def notify_create
       Task.notify_create
     end
+    
+    def end_at
+      start_at + duration * 60 * 60
+    end
   end
 end

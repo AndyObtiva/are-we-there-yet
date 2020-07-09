@@ -31,29 +31,23 @@ class AreWeThereYet
         }
       }
     }
-
+    
     ## Use after_body block to setup observers for widgets in body
     #
     after_body {
-      sdEventOne = Calendar.getInstance();
-      edEventOne = Calendar.getInstance();
-      edEventOne.add(Calendar::DATE, 10); 
-      
-      sdEventTwo = Calendar.getInstance();
-      edEventTwo = Calendar.getInstance();
-      sdEventTwo.add(Calendar::DATE, 11);
-      edEventTwo.add(Calendar::DATE, 15);
-      
-      cpDate = Calendar.getInstance();
-      cpDate.add(Calendar::DATE, 16);
-      
-      eventOne = GanttEvent.new(@gantt_chart.swt_widget, "Scope Event 1", sdEventOne, edEventOne, 35);		
-      eventTwo = GanttEvent.new(@gantt_chart.swt_widget, "Scope Event 2", sdEventTwo, edEventTwo, 10);		
-      eventThree = GanttEvent.new(@gantt_chart.swt_widget, "Checkpoint", cpDate, cpDate, 75);
-      eventThree.setCheckpoint(true);
-      
-      @gantt_chart.swt_widget.addConnection(eventOne, eventTwo);
-      @gantt_chart.swt_widget.addConnection(eventTwo, eventThree);		         
+      render_gantt_chart = lambda do |new_tasks|
+        new_tasks.to_a.each do |task|
+          gantt_event = to_gantt_event(task)
+          @gantt_chart.swt_widget.addConnection(@last_gantt_event, gantt_event) if @last_gantt_event
+          @last_gantt_event = gantt_event
+        end
+#         cpDate = Calendar.getInstance();
+#         cpDate.add(Calendar::DATE, 16);        
+#         eventThree = GanttEvent.new(@gantt_chart.swt_widget, "Checkpoint", cpDate, cpDate, 75);
+#         eventThree.setCheckpoint(true);        
+      end
+      observe(Task, :all, &render_gantt_chart) 
+      render_gantt_chart.call(Task.all)
     }
 
     ## Add widget content inside custom shell body
@@ -236,5 +230,14 @@ class AreWeThereYet
         }
       }.open
     end
+    
+    def to_gantt_event(task)
+      start_date_time = Calendar.getInstance # TODO move to Task class
+      start_date_time.set(task.start_at.year, task.start_at.month, task.start_at.day, task.start_at.hour, task.start_at.min, task.start_at.sec)
+      end_date_time = Calendar.getInstance # TODO move to Task class
+      end_date_time.set(task.end_at.year, task.end_at.month, task.end_at.day, task.end_at.hour, task.end_at.min, task.end_at.sec)         
+      GanttEvent.new(@gantt_chart.swt_widget, task.name, start_date_time, end_date_time, task.finished? ? 100 : 0) # TODO support percent complete
+    end
+    
   end
 end
