@@ -1,13 +1,16 @@
 require 'models/are_we_there_yet/task'
+require 'views/are_we_there_yet/gantt_chart_settings'
 
 java_import 'java.util.Calendar'
 
-java_import 'org.eclipse.nebula.widgets.ganttchart.GanttChart'
-java_import 'org.eclipse.nebula.widgets.ganttchart.GanttEvent'
-
-class AreWeThereYet
-  class AppView
+module Glimmer
+  include_package 'org.eclipse.nebula.widgets.ganttchart'
+end
+  
+class AreWeThereYet  
+  class AppView        
     include Glimmer::UI::CustomShell
+    
     
     ## Add options like the following to configure CustomShell by outside consumers
     #
@@ -30,6 +33,7 @@ class AreWeThereYet
 #           display_preferences_dialog
         }
       }
+      @gantt_chart_settings = GanttChartSettings.new
     }
     
     ## Use after_body block to setup observers for widgets in body
@@ -38,7 +42,7 @@ class AreWeThereYet
       render_gantt_chart = lambda do |new_tasks|
         @gantt_chart.swt_widget.dispose
         @gantt_chart_container.content {
-          @gantt_chart = gantt_chart {
+          @gantt_chart = gantt_chart(GanttFlags::H_SCROLL_FIXED_RANGE, @gantt_chart_settings) {
             layout_data(:fill, :fill, true, true) {
               minimum_height 200
             }
@@ -74,8 +78,8 @@ class AreWeThereYet
         }
         sash_form(:vertical) {
           layout_data(:fill, :fill, true, true)
-          @gantt_chart_container = composite {
-            @gantt_chart = gantt_chart {
+          @gantt_chart_container = composite { |container|
+            @gantt_chart = gantt_chart(GanttFlags::H_SCROLL_FIXED_RANGE, @gantt_chart_settings) {
               layout_data(:fill, :fill, true, true) {
                 minimum_height 200
               }

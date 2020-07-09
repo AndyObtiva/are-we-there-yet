@@ -6,7 +6,7 @@ class AreWeThereYet
       include Glimmer::DataBinding::ObservableModel
       
       def notify_create
-        notify_observers('all')      
+        notify_observers('all')  
       end
       
     end

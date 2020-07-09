@@ -23,7 +23,7 @@ class CreateTasks < ActiveRecord::Migration[5.2]
         name:         "Create task #{n}",
         task_type:    'Development',
         start_at:     "2020-07-0#{n+1} 12:47:38",
-        duration:     n+1,
+        duration:     n+8,
         priority:     'High',
         finished:     false,
       )
