@@ -13,10 +13,9 @@ class CreateTasks < ActiveRecord::Migration[5.2]
       t.string     :priority
       t.integer    :position
     end
-    pd 'looping'
+    
     8.times do |n|
       AreWeThereYet::Task.create!(
-#       pd Task.create(
         project_name: 'MVP',
         name:         "Create task #{n}",
         task_type:    'Development',

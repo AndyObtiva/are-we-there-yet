@@ -41,7 +41,94 @@ class AreWeThereYet
         # Replace example content below with custom shell content
         minimum_size 320, 240
         text "Are We There Yet - App View"
-        grid_layout
+        grid_layout {
+          margin_width 5
+          margin_height 5
+          horizontal_spacing 5
+          vertical_spacing 5
+        }
+        composite {
+          grid_layout 6, true
+          composite {
+            layout_data(:fill, :fill, true, true) {
+              width_hint 115
+            }
+            fill_layout :vertical
+            label {
+              text 'Task'
+            }
+            text {              
+            }
+          }
+          composite {
+            layout_data(:fill, :fill, true, true) {
+              width_hint 115
+            }
+            fill_layout :vertical
+            label {
+              text 'Project'
+            }
+            text {              
+            }
+          }
+          composite {
+            layout_data(:fill, :fill, true, true) {
+              width_hint 115
+            }
+            fill_layout :vertical
+            label {
+              text 'Type'
+            }
+            text {              
+            }
+          }
+          composite {
+            layout_data(:fill, :fill, true, true) {
+              width_hint 115
+            }
+            fill_layout :vertical
+            label {
+              text 'Start Date/Time'
+            }
+            text {              
+            }
+          }
+          composite {
+            layout_data(:fill, :fill, true, true) {
+              width_hint 115
+            }
+            fill_layout :vertical
+            label {
+              text 'Duration'
+            }
+            text {              
+            }
+          }
+          composite {
+            layout_data(:fill, :fill, true, true) {
+              width_hint 115  
+            }
+            fill_layout :vertical
+            label {
+              text 'Priority'
+            }
+            text {
+              on_key_pressed { |event|
+                if event.keyCode == swt(:cr)
+                  AreWeThereYet::Task.create!(
+                    project_name: 'MVP',
+                    name:         "Create task",
+                    task_type:    'Development',
+                    start_at:     Time.now,
+                    duration:     3,
+                    priority:     'High',
+                    position:     3
+                  )
+                end
+              }
+            }
+          }
+        }
         table {
           layout_data :fill, :fill, true, true
           table_column {
