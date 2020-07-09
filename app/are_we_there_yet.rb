@@ -6,6 +6,7 @@ require 'bundler/setup'
 Bundler.require
 
 require 'db'
+ActiveSupport::Dependencies.unhook!
 require 'views/are_we_there_yet/app_view'
 
 class AreWeThereYet

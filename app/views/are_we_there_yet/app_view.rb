@@ -1,17 +1,3 @@
-java_import 'org.eclipse.swt.browser.Browser'
-java_import 'org.eclipse.swt.custom.TableEditor'
-java_import 'org.eclipse.swt.widgets.Composite'
-java_import 'org.eclipse.swt.widgets.Display'
-java_import 'org.eclipse.swt.widgets.Shell'
-java_import 'org.eclipse.swt.widgets.Group'
-java_import 'org.eclipse.swt.widgets.Table'
-java_import 'org.eclipse.swt.widgets.Tree'
-java_import 'org.eclipse.swt.widgets.TableColumn'
-java_import 'org.eclipse.swt.widgets.TableItem'
-java_import 'org.eclipse.swt.layout.FillLayout'
-java_import 'org.eclipse.swt.layout.GridLayout'
-java_import 'org.eclipse.swt.widgets.Layout'
-
 require 'models/are_we_there_yet/task_repository'
 
 class AreWeThereYet
