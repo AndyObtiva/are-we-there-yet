@@ -5,6 +5,8 @@ Simply enter tasks and see them reflected in the project progress Gantt Chart.
 
 ![Are We There Yet Screenshot](are-we-there-yet-screenshot.png)
 
+Note: this project is still work in progress.
+
 ### Initial Plan
 
 [PLAN.md](PLAN.md)
