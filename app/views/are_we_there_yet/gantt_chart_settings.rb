@@ -5,7 +5,7 @@ class AreWeThereYet
   class GanttChartSettings < AbstractSettings
     # TODO expose as preferences
 #     def getInitialZoomLevel
-#       ISettings.ZOOM_HOURS_NORMAL
+#       ISettings.ZOOM_DAY_NORMAL
 #     end
   end
 end

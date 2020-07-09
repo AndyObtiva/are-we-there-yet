@@ -20,10 +20,10 @@ class CreateTasks < ActiveRecord::Migration[5.2]
       AreWeThereYet::Task.create!(
         project_name: 'MVP',
         position:     n,
-        name:         "Create task #{n}",
+        name:         "Task #{n}",
         task_type:    'Development',
-        start_at:     "2020-07-0#{n+1} 12:47:38",
-        duration:     n+8,
+        start_at:     (Time.now - 30*24*60*60) + n*4*24*60*60,
+        duration:     4*24,
         priority:     'High',
         finished:     false,
       )
