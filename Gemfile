@@ -5,6 +5,12 @@ source 'https://rubygems.org'
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
 gem 'glimmer-dsl-swt', '~> 0.2.0'
+gem 'activerecord', '~> 5.2.4.3'
+gem 'activerecord-jdbcsqlite3-adapter', '~> 52.6', :platform => :jruby
+
+group :development do
+  gem 'glimmer-cs-gladiator'
+end
 
 group :test do
   gem 'rspec'

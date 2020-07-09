@@ -58,3 +58,5 @@ Gemfile.lock
 # Glimmer
 dist
 packages      
+
+*.sqlite3

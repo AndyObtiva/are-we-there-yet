@@ -1,3 +1,19 @@
+java_import 'org.eclipse.swt.browser.Browser'
+java_import 'org.eclipse.swt.custom.TableEditor'
+java_import 'org.eclipse.swt.widgets.Composite'
+java_import 'org.eclipse.swt.widgets.Display'
+java_import 'org.eclipse.swt.widgets.Shell'
+java_import 'org.eclipse.swt.widgets.Group'
+java_import 'org.eclipse.swt.widgets.Table'
+java_import 'org.eclipse.swt.widgets.Tree'
+java_import 'org.eclipse.swt.widgets.TableColumn'
+java_import 'org.eclipse.swt.widgets.TableItem'
+java_import 'org.eclipse.swt.layout.FillLayout'
+java_import 'org.eclipse.swt.layout.GridLayout'
+java_import 'org.eclipse.swt.widgets.Layout'
+
+require 'models/are_we_there_yet/task_repository'
+
 class AreWeThereYet
   class AppView
     include Glimmer::UI::CustomShell
@@ -40,10 +56,33 @@ class AreWeThereYet
         minimum_size 320, 240
         text "Are We There Yet - App View"
         grid_layout
-        label(:center) {
-          text bind(self, :greeting)
-          font height: 40
-          layout_data :fill, :center, true, true
+        table {
+          layout_data :fill, :fill, true, true
+          table_column {
+            text 'Task'
+            width 80
+          }
+          table_column {
+            text 'Project'
+            width 80
+          }
+          table_column {
+            text 'Type'
+            width 80
+          }
+          table_column {
+            text 'Start Date/Time'
+            width 80
+          }
+          table_column {
+            text 'Duration (hours)'
+            width 80
+          }
+          table_column {
+            text 'Priority'
+            width 80
+          }
+          items bind(TaskRepository.instance, :all) {|obj| pd obj}, column_properties(:name, :project_name, :task_type, :start_at, :duration, :priority)
         }
       }
     }
@@ -51,9 +90,7 @@ class AreWeThereYet
     def display_about_dialog
       message_box = MessageBox.new(swt_widget)
       message_box.setText("About")
-      message = "Are We There Yet - App View #{VERSION}
-
-"
+      message = "Are We There Yet - App View #{VERSION}"
       message += LICENSE
       message_box.setMessage(message)
       message_box.open
