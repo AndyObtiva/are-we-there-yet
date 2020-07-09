@@ -20,7 +20,7 @@ class AreWeThereYet
     #
     #
     before_body {
-      Display.setAppName('Are We There Yet')
+      Display.setAppName('Are We There Yet?')
       Display.setAppVersion(VERSION)
       @display = display {
         on_about {
@@ -36,15 +36,23 @@ class AreWeThereYet
     #
     after_body {
       render_gantt_chart = lambda do |new_tasks|
+        @gantt_chart.swt_widget.dispose
+        @gantt_chart_container.content {
+          @gantt_chart = gantt_chart {
+            layout_data(:fill, :fill, true, true) {
+              minimum_height 200
+            }
+          }          
+        }
+        @last_gantt_event = nil  
         new_tasks.to_a.each do |task|
           gantt_event = to_gantt_event(task)
-          @gantt_chart.swt_widget.addConnection(@last_gantt_event, gantt_event) if @last_gantt_event
+          if @last_gantt_event
+            @last_gantt_event.setCheckpoint(false)
+            @gantt_chart.swt_widget.addConnection(@last_gantt_event, gantt_event)
+          end
           @last_gantt_event = gantt_event
         end
-#         cpDate = Calendar.getInstance();
-#         cpDate.add(Calendar::DATE, 16);        
-#         eventThree = GanttEvent.new(@gantt_chart.swt_widget, "Checkpoint", cpDate, cpDate, 75);
-#         eventThree.setCheckpoint(true);        
       end
       observe(Task, :all, &render_gantt_chart) 
       render_gantt_chart.call(Task.all)
@@ -57,7 +65,7 @@ class AreWeThereYet
       shell {
         # Replace example content below with custom shell content
         minimum_size 320, 240
-        text "Are We There Yet - App View"
+        text "Are We There Yet?"
         grid_layout {
           margin_width 5
           margin_height 5
@@ -66,7 +74,7 @@ class AreWeThereYet
         }
         sash_form(:vertical) {
           layout_data(:fill, :fill, true, true)
-          composite {
+          @gantt_chart_container = composite {
             @gantt_chart = gantt_chart {
               layout_data(:fill, :fill, true, true) {
                 minimum_height 200
@@ -236,7 +244,9 @@ class AreWeThereYet
       start_date_time.set(task.start_at.year, task.start_at.month, task.start_at.day, task.start_at.hour, task.start_at.min, task.start_at.sec)
       end_date_time = Calendar.getInstance # TODO move to Task class
       end_date_time.set(task.end_at.year, task.end_at.month, task.end_at.day, task.end_at.hour, task.end_at.min, task.end_at.sec)         
-      GanttEvent.new(@gantt_chart.swt_widget, task.name, start_date_time, end_date_time, task.finished? ? 100 : 0) # TODO support percent complete
+      gantt_event = GanttEvent.new(@gantt_chart.swt_widget, task.name, start_date_time, end_date_time, task.finished? ? 100 : 0) # TODO support percent complete
+      gantt_event.setCheckpoint(true)
+      gantt_event
     end
     
   end
