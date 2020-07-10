@@ -26,6 +26,9 @@ Are We There Yet? is a simple tool that gives a quick "at a glance" view of mult
 - Sort Tasks
 - Filter Tasks
 - Group Listed Tasks by Project
+- Reorder Tasks per Project
+- Mark Task as Started
+- Mark Task as Finished
 - List Projects
 - Edit Project
 - View Progress Chart
