@@ -5,7 +5,11 @@ Simply enter tasks and see them reflected in the project progress Gantt Chart.
 
 ![Are We There Yet Screenshot](are-we-there-yet-screenshot.png)
 
-Note: this project is still work in progress.
+**Note**: this project is still work in progress.
+
+### Development Progress
+
+You may track progress of app development under [GitHub Projects](https://github.com/AndyObtiva/are-we-there-yet/projects/1).
 
 ### Initial Plan
 
