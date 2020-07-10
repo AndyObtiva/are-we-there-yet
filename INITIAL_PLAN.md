@@ -1,6 +1,6 @@
 # <img src="https://raw.githubusercontent.com/AndyObtiva/are-we-there-yet/master/are-we-there-yet-logo.svg" height=40 /> Are We There Yet? - Initial Plan
 
-“Plans are nothing; planning is everything” - former US President Dwight D Eisenhower
+“Plans are nothing; planning is everything” - Former US President Dwight D Eisenhower
 
 ## Background
 
