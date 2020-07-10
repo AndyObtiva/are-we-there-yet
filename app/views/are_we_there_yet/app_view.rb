@@ -3,14 +3,9 @@ require 'views/are_we_there_yet/gantt_chart_settings'
 
 java_import 'java.util.Calendar'
 
-module Glimmer
-  include_package 'org.eclipse.nebula.widgets.ganttchart'
-end
-  
 class AreWeThereYet  
   class AppView        
     include Glimmer::UI::CustomShell
-    
     
     ## Add options like the following to configure CustomShell by outside consumers
     #
@@ -30,7 +25,7 @@ class AreWeThereYet
           display_about_dialog
         }
         on_preferences {
-#           display_preferences_dialog
+#           #display_preferences_dialog
         }
       }
       @gantt_chart_settings = GanttChartSettings.new

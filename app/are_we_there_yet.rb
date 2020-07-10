@@ -6,13 +6,17 @@ require 'bundler/setup'
 Bundler.require
 
 require 'db/db'
-ActiveSupport::Dependencies.unhook!
 require 'vendor/nebula/org.eclipse.nebula.widgets.ganttchart_1.0.0.jar'
-require 'views/are_we_there_yet/app_view'
 
+Glimmer::Config.import_swt_packages += [
+  'org.eclipse.nebula.widgets.ganttchart'
+]
+
+require 'views/are_we_there_yet/app_view'
+  
 class AreWeThereYet
   include Glimmer
-
+  
   APP_ROOT = File.expand_path('../..', __FILE__)        
   VERSION = File.read(File.join(APP_ROOT, 'VERSION'))
   LICENSE = File.read(File.join(APP_ROOT, 'LICENSE.txt'))
