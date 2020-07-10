@@ -13,7 +13,9 @@ You may track progress of app development under [GitHub Projects](https://github
 
 ### Initial Plan
 
-[PLAN.md](PLAN.md)
+“Plans are nothing; planning is everything” - former US President Dwight D Eisenhower
+
+[INITIAL_PLAN.md](INITIAL_PLAN.md)
 
 ### License
 
