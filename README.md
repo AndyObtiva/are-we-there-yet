@@ -7,9 +7,9 @@ Simply enter tasks and see them reflected in the project progress Gantt Chart.
 
 **Note**: this project is still work in progress.
 
-### Development Progress
+### Development Releases
 
-You may track progress of app development under [GitHub Projects](https://github.com/AndyObtiva/are-we-there-yet/projects/1).
+You may track this app's development under [GitHub Projects](https://github.com/AndyObtiva/are-we-there-yet/projects/1).
 
 ### Initial Plan
 
