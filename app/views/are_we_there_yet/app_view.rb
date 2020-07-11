@@ -2,6 +2,7 @@ require 'models/are_we_there_yet/task'
 require 'views/are_we_there_yet/gantt_chart_settings'
 require 'views/are_we_there_yet/task_form'
 require 'views/are_we_there_yet/task_table'
+require 'views/are_we_there_yet/preferences_dialog'
 
 java_import 'java.util.Calendar'
 
@@ -14,7 +15,6 @@ class AreWeThereYet
     # options :title, :background_color
     # option :width, default: 320
     # option :height, default: 240
-#     option :greeting, default: 'Hello, World!'
 
     ## Use before_body block to pre-initialize variables to use in body
     #
@@ -27,7 +27,7 @@ class AreWeThereYet
           display_about_dialog
         }
         on_preferences {
-#           #display_preferences_dialog
+          display_preferences_dialog
         }
       }
       @gantt_chart_settings = GanttChartSettings.new
@@ -99,38 +99,8 @@ class AreWeThereYet
       message_box.open
     end
     
-    def display_preferences_dialog
-      # TODO update this to expose GanttChartSettings class
-      dialog(swt_widget) {
-        text 'Preferences'
-        grid_layout {
-          margin_height 5
-          margin_width 5
-        }
-        group {
-          row_layout {
-            type :vertical
-            spacing 10
-          }
-          text 'Greeting'
-          font style: :bold
-          [
-            'Hello, World!', 
-            'Howdy, Partner!'
-          ].each do |greeting_text|
-            button(:radio) {
-              text greeting_text
-              selection bind(self, :greeting) { |g| g == greeting_text }
-              layout_data {
-                width 160
-              }
-              on_widget_selected { |event|
-                self.greeting = event.widget.getText
-              }
-            }
-          end
-        }
-      }.open
+    def display_preferences_dialog        
+      preferences_dialog(parent_shell_proxy: body_root).open
     end
     
     def to_gantt_event(task)
