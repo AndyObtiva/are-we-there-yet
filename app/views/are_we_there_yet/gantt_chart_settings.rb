@@ -1,3 +1,4 @@
+# TODO move to models 
 java_import 'org.eclipse.nebula.widgets.ganttchart.ISettings'
 java_import 'org.eclipse.nebula.widgets.ganttchart.AbstractSettings'
 

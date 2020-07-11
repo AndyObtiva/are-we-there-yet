@@ -1,5 +1,6 @@
 require 'models/are_we_there_yet/task'
 require 'views/are_we_there_yet/gantt_chart_settings'
+require 'views/are_we_there_yet/task_form'
 
 java_import 'java.util.Calendar'
 
@@ -81,88 +82,7 @@ class AreWeThereYet
             }
           }
           composite {
-            composite {
-              grid_layout 6, true
-              composite {
-                layout_data(:fill, :fill, true, true) {
-                  width_hint 115
-                }
-                fill_layout :vertical
-                label {
-                  text 'Task'
-                }
-                text {              
-                }
-              }
-              composite {
-                layout_data(:fill, :fill, true, true) {
-                  width_hint 115
-                }
-                fill_layout :vertical
-                label {
-                  text 'Project'
-                }
-                text {              
-                }
-              }
-              composite {
-                layout_data(:fill, :fill, true, true) {
-                  width_hint 115
-                }
-                fill_layout :vertical
-                label {
-                  text 'Type'
-                }
-                text {              
-                }
-              }
-              composite {
-                layout_data(:fill, :fill, true, true) {
-                  width_hint 115
-                }
-                fill_layout :vertical
-                label {
-                  text 'Start Date/Time'
-                }
-                text {              
-                }
-              }
-              composite {
-                layout_data(:fill, :fill, true, true) {
-                  width_hint 115
-                }
-                fill_layout :vertical
-                label {
-                  text 'Duration'
-                }
-                text {              
-                }
-              }
-              composite {
-                layout_data(:fill, :fill, true, true) {
-                  width_hint 115  
-                }
-                fill_layout :vertical
-                label {
-                  text 'Priority'
-                }
-                text {
-                  on_key_pressed { |event|
-                    if event.keyCode == swt(:cr)
-                      AreWeThereYet::Task.create!(
-                        project_name: 'MVP',
-                        name:         "Create task",
-                        task_type:    'Development',
-                        start_at:     Time.now,
-                        duration:     3,
-                        priority:     'High',
-                        position:     3
-                      )
-                    end
-                  }
-                }
-              }
-            }
+            task_form
             table {
               layout_data :fill, :fill, true, true
               table_column {
