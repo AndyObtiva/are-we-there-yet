@@ -86,7 +86,8 @@ class AreWeThereYet
           @labels[:start_at] = label {
             text 'Start Date/Time'
           }
-          @texts[:start_at] = text {              
+          @texts[:start_at] = c_date_time(CDT::BORDER | CDT::COMPACT | CDT::DROP_DOWN | CDT::DATE_LONG | CDT::TIME_MEDIUM) {
+            selection java.util.Date.new
             on_key_pressed { |event|
               @texts[:duration].swt_widget.set_focus if event.keyCode == swt(:cr)
             }
