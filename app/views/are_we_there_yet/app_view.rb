@@ -1,6 +1,7 @@
 require 'models/are_we_there_yet/task'
 require 'views/are_we_there_yet/gantt_chart_settings'
 require 'views/are_we_there_yet/task_form'
+require 'views/are_we_there_yet/task_table'
 
 java_import 'java.util.Calendar'
 
@@ -83,34 +84,7 @@ class AreWeThereYet
           }
           composite {
             task_form
-            table {
-              layout_data :fill, :fill, true, true
-              table_column {
-                text 'Task'
-                width 120
-              }
-              table_column {
-                text 'Project'
-                width 120
-              }
-              table_column {
-                text 'Type'
-                width 120
-              }
-              table_column {
-                text 'Start Date/Time'
-                width 120
-              }
-              table_column {
-                text 'Duration (hours)'
-                width 120
-              }
-              table_column {
-                text 'Priority'
-                width 120
-              }
-              items bind(Task, :all, on_read: :to_a), column_properties(:name, :project_name, :task_type, :start_at, :duration, :priority)
-            }
+            task_table
           }
         }
       }
