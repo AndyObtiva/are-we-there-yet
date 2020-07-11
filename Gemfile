@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
-gem 'glimmer-dsl-swt', '~> 0.2.1'
+gem 'glimmer-dsl-swt', '~> 0.2.2'
 gem 'activerecord', '~> 5.2.4.3'
 gem 'activerecord-jdbcsqlite3-adapter', '~> 52.6', :platform => :jruby
 
