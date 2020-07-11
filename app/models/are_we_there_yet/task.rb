@@ -62,6 +62,19 @@ class AreWeThereYet
       end
       value.to_i
     end
+
+    # TODO expose and finish this     
+#     def end_at=(value)
+#       duration_time = value - start_at
+#       duration_in_hours = (duration_time / (60.0 * 60)).to_i
+#       if duration_in_hours <= 8
+#         self.duration = "#{duration_in_hours} hour#{'s' if duration_in_hours > 1}"
+#       elsif duration_in_hours <= 30*24
+#         self.duration = "#{(duration_in_hours/24.0).to_i} days"
+#       else duration_in_hours <= 30*24
+#         self.duration = "#{(duration_in_hours/(24.0*30)).to_i} months"
+#       end
+#     end
     
     def end_at
       start_at + duration_in_hours * 60 * 60

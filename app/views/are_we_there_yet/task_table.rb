@@ -29,29 +29,37 @@ class AreWeThereYet
         layout_data :fill, :fill, true, true
         table_column {
           text 'Task'
-          width 120
+          width CONFIG[:table_column_width]
         }
         table_column {
           text 'Project'
-          width 120
+          width CONFIG[:table_column_width]
         }
         table_column {
           text 'Type'
-          width 120
+          width CONFIG[:table_column_width]
         }
         table_column {
           text 'Start Date/Time'
-          width 120
+          width CONFIG[:table_column_width]
         }
         table_column {
           text 'Duration (hours)'
-          width 120
+          width CONFIG[:table_column_width]
         }
         table_column {
           text 'Priority'
-          width 120
+          width CONFIG[:table_column_width]
         }
         items bind(Task, :all, on_read: :to_a), column_properties(:name, :project_name, :task_type, :start_at, :duration, :priority)
+        on_control_resized {
+          window_width = body_root.swt_widget.shell.bounds.width
+          columns = body_root.swt_widget.columns
+          new_column_width = window_width.to_f / columns.size
+          columns.each do |column|
+            column.width = new_column_width
+          end
+        }
       }    
     }
 

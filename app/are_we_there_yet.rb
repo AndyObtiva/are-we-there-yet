@@ -25,6 +25,10 @@ class AreWeThereYet
   VERSION = File.read(File.join(APP_ROOT, 'VERSION'))
   LICENSE = File.read(File.join(APP_ROOT, 'LICENSE.txt'))
   
+  CONFIG = {
+    table_column_width: 120,
+  }
+  
   def open
     app_view.open
   end
