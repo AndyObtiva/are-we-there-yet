@@ -10,8 +10,21 @@ class AreWeThereYet
       end      
     end
     
+    validates :name, presence: true
+    validates :project_name, presence: true
+    validates :task_type, presence: true
+    
     def notify_create
       Task.notify_create
+    end
+    
+    def reset
+      self.name = nil
+      self.project_name = nil
+      self.task_type = nil
+      self.start_at = nil
+      self.duration = nil
+      self.priority = nil
     end
     
     def project_name_options

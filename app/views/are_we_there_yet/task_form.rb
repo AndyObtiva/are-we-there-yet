@@ -17,11 +17,13 @@ class AreWeThereYet
     #
     before_body {
       @task = AreWeThereYet::Task.new
+      @labels = {}
+      @texts = {}
     }
     
     ## Use after_body block to setup observers for widgets in body
     #
-    after_body {
+    after_body {      
     }
 
     ## Add widget content inside custom shell body
@@ -35,12 +37,14 @@ class AreWeThereYet
             width_hint 115
           }
           fill_layout :vertical
-          label {
+          @labels[:name] = label {
             text 'Task'
           }
-          @task_text = text {              
+          @texts[:name] = text { 
+            focus true             
+            text bind(@task, :name)
             on_key_pressed { |event|
-              @project_name_text.swt_widget.set_focus if event.keyCode == swt(:cr)
+              @texts[:project_name].swt_widget.set_focus if event.keyCode == swt(:cr)
             }
           }
         }
@@ -49,13 +53,13 @@ class AreWeThereYet
             width_hint 115
           }
           fill_layout :vertical
-          label {
+          @labels[:project_name] = label {
             text 'Project'
           }
-          @project_name_text = combo {              
+          @texts[:project_name] = combo {              
             selection bind(@task, :project_name)
             on_key_pressed { |event|
-              @task_type_text.swt_widget.set_focus if event.keyCode == swt(:cr)
+              @texts[:task_type].swt_widget.set_focus if event.keyCode == swt(:cr)
             }
           }
         }
@@ -64,13 +68,13 @@ class AreWeThereYet
             width_hint 115
           }
           fill_layout :vertical
-          label {
+          @labels[:task_type] = label {
             text 'Type'
           }
-          @task_type_text = combo {              
+          @texts[:task_type] = combo {              
             selection bind(@task, :task_type)
             on_key_pressed { |event|
-              @start_date_time_text.swt_widget.set_focus if event.keyCode == swt(:cr)
+              @texts[:start_at].swt_widget.set_focus if event.keyCode == swt(:cr)
             }
           }
         }
@@ -79,12 +83,12 @@ class AreWeThereYet
             width_hint 115
           }
           fill_layout :vertical
-          label {
+          @labels[:start_at] = label {
             text 'Start Date/Time'
           }
-          @start_date_time_text = text {              
+          @texts[:start_at] = text {              
             on_key_pressed { |event|
-              @duration_text.swt_widget.set_focus if event.keyCode == swt(:cr)
+              @texts[:duration].swt_widget.set_focus if event.keyCode == swt(:cr)
             }
           }
         }
@@ -93,13 +97,13 @@ class AreWeThereYet
             width_hint 115
           }
           fill_layout :vertical
-          label {
+          @labels[:duration] = label {
             text 'Duration'
           }
-          @duration_text = combo(:read_only) {
+          @texts[:duration] = combo(:read_only) {
             selection bind(@task, :duration)
             on_key_pressed { |event|
-              @priority_text.swt_widget.set_focus if event.keyCode == swt(:cr)
+              @texts[:priority].swt_widget.set_focus if event.keyCode == swt(:cr)
             }
           }
         }
@@ -108,28 +112,33 @@ class AreWeThereYet
             width_hint 115  
           }
           fill_layout :vertical
-          label {
+          @labels[:priority] = label {
             text 'Priority'
           }
-          @priority_text = combo(:read_only) {
+          @texts[:priority] = combo(:read_only) {
             selection bind(@task, :priority)
             on_key_pressed { |event|
               if event.keyCode == swt(:cr)
-                AreWeThereYet::Task.create!(
-                  project_name: 'MVP',
-                  name:         "Create task",
-                  task_type:    'Development',
-                  start_at:     Time.now,
-                  duration:     3,
-                  priority:     'High',
-                  position:     3
-                )
+                @task.start_at = Time.now
+                new_task = @task.clone
+                if new_task.save
+                  @task.reset
+                  @texts[:name].swt_widget.set_focus
+                else
+                  @texts[new_task.errors.keys.first].swt_widget.set_focus
+                end
+                @labels.each do |attribute, label|
+                  label.content {
+                    foreground new_task.errors.keys.include?(attribute) ? :red : :black
+                    tool_tip_text new_task.errors.keys.include?(attribute) ? new_task.errors[attribute].first : nil
+                  }
+                end
               end
             }
           }
         }
       }
     }
-
+    
   end
 end

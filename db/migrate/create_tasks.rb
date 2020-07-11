@@ -6,7 +6,7 @@ class CreateTasks < ActiveRecord::Migration[5.2]
   def up
     create_table :tasks do |t|
       t.string     :project_name
-      t.integer    :position
+      t.integer    :position, auto_increment: true
       t.string     :name
       t.string     :task_type
       t.timestamp  :start_at
