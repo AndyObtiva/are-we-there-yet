@@ -206,6 +206,7 @@ class AreWeThereYet
     end
     
     def display_preferences_dialog
+      # TODO update this to expose GanttChartSettings class
       dialog(swt_widget) {
         text 'Preferences'
         grid_layout {

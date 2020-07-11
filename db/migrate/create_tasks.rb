@@ -12,7 +12,6 @@ class CreateTasks < ActiveRecord::Migration[5.2]
       t.timestamp  :start_at
       t.integer    :duration
       t.string     :priority
-      t.string     :priority
       t.boolean    :finished, default: false
     end
     
