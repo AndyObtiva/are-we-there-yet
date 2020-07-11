@@ -5,7 +5,7 @@
 ## Background
 
 It is tough to manage multiple projects via standard Office applications, such as Excel and Word. 
-It would be overkill to use professional Project Management software for very simple projects.
+It would be overkill to use enterprise Project Management software for very simple projects.
 Are We There Yet? is a simple tool that gives a quick "at a glance" view of multiple small projects and their progress of completion.
 
 ## Business Use Cases
