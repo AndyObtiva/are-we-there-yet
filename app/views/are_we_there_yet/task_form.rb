@@ -16,6 +16,7 @@ class AreWeThereYet
     #
     #
     before_body {
+      @task = AreWeThereYet::Task.new
     }
     
     ## Use after_body block to setup observers for widgets in body
@@ -38,6 +39,9 @@ class AreWeThereYet
             text 'Task'
           }
           @task_text = text {              
+            on_key_pressed { |event|
+              @project_name_text.swt_widget.set_focus if event.keyCode == swt(:cr)
+            }
           }
         }
         composite {
@@ -48,7 +52,11 @@ class AreWeThereYet
           label {
             text 'Project'
           }
-          @project_text = text {              
+          @project_name_text = combo {              
+            selection bind(@task, :project_name)
+            on_key_pressed { |event|
+              @task_type_text.swt_widget.set_focus if event.keyCode == swt(:cr)
+            }
           }
         }
         composite {
@@ -59,7 +67,11 @@ class AreWeThereYet
           label {
             text 'Type'
           }
-          @type_text = text {              
+          @task_type_text = combo {              
+            selection bind(@task, :task_type)
+            on_key_pressed { |event|
+              @start_date_time_text.swt_widget.set_focus if event.keyCode == swt(:cr)
+            }
           }
         }
         composite {
@@ -71,6 +83,9 @@ class AreWeThereYet
             text 'Start Date/Time'
           }
           @start_date_time_text = text {              
+            on_key_pressed { |event|
+              @duration_text.swt_widget.set_focus if event.keyCode == swt(:cr)
+            }
           }
         }
         composite {
@@ -81,7 +96,11 @@ class AreWeThereYet
           label {
             text 'Duration'
           }
-          @duration_text = text {              
+          @duration_text = combo(:read_only) {
+            selection bind(@task, :duration)
+            on_key_pressed { |event|
+              @priority_text.swt_widget.set_focus if event.keyCode == swt(:cr)
+            }
           }
         }
         composite {
@@ -92,7 +111,8 @@ class AreWeThereYet
           label {
             text 'Priority'
           }
-          @priority_text = text {
+          @priority_text = combo(:read_only) {
+            selection bind(@task, :priority)
             on_key_pressed { |event|
               if event.keyCode == swt(:cr)
                 AreWeThereYet::Task.create!(

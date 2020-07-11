@@ -10,7 +10,7 @@ class CreateTasks < ActiveRecord::Migration[5.2]
       t.string     :name
       t.string     :task_type
       t.timestamp  :start_at
-      t.integer    :duration
+      t.string     :duration
       t.string     :priority
       t.boolean    :finished, default: false
     end
@@ -22,7 +22,7 @@ class CreateTasks < ActiveRecord::Migration[5.2]
         name:         "Task #{n}",
         task_type:    'Development',
         start_at:     (Time.now - 30*24*60*60) + n*4*24*60*60,
-        duration:     4*24,
+        duration:     '4 days',
         priority:     'High',
         finished:     false,
       )
