@@ -40,7 +40,7 @@ class AreWeThereYet
           width CONFIG[:table_column_width_hint]
         }
         table_column {
-          text 'Start Date/Time'
+          text 'Start Date'
           width CONFIG[:table_column_width_hint]
         }
         table_column {
@@ -48,14 +48,14 @@ class AreWeThereYet
           width CONFIG[:table_column_width_hint]
         }
         table_column {
-          text 'End Date/Time'
+          text 'End Date'
           width CONFIG[:table_column_width_hint]
         }
         table_column {
           text 'Priority'
           width CONFIG[:table_column_width_hint]
         }
-        items bind(Task, :all, on_read: :to_a), column_properties(:name, :project_name, :task_type, :start_at, :duration, :end_at, :priority)
+        items bind(Task, :all, on_read: :to_a), column_properties(:name, :project_name, :task_type, :start_date, :duration, :end_date, :priority)
         on_control_resized {
           window_width = body_root.swt_widget.shell.bounds.width
           columns = body_root.swt_widget.columns

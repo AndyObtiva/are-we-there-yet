@@ -20,7 +20,7 @@ class AreWeThereYet
     before_body {
       @task = AreWeThereYet::Task.new
       @labels = {}
-      @texts = {}
+      @inputs = {}
     }
     
     ## Use after_body block to setup observers for widgets in body
@@ -33,22 +33,30 @@ class AreWeThereYet
     #
     body {
       composite {
-        grid_layout ATTRIBUTE_COUNT, true
+        grid_layout(ATTRIBUTE_COUNT, true) {
+          horizontal_spacing 0
+          vertical_spacing 0
+          margin_width 0
+          margin_height 0
+        }
         composite {
           layout_data(:fill, :fill, true, true) {
             width_hint CONFIG[:table_column_width_hint] - 5
           }
-          grid_layout 1, true
+          grid_layout(1, true) {
+            horizontal_spacing 0
+            #margin_width 0
+          }
           @labels[:name] = label {
-            layout_data(:fill, :fill, true, true)
+            layout_data(:fill, :top, true, true)
             text 'Task'
           }
-          @texts[:name] = text { 
-            layout_data(:fill, :fill, true, true)
+          @inputs[:name] = text { 
+            layout_data(:fill, :top, true, true)
             focus true             
             text bind(@task, :name)
             on_key_pressed { |event|
-              @texts[:project_name].swt_widget.set_focus if event.keyCode == swt(:cr)
+              @inputs[:project_name].swt_widget.set_focus if event.keyCode == swt(:cr)
             }
           }
         }
@@ -56,16 +64,19 @@ class AreWeThereYet
           layout_data(:fill, :fill, true, true) {
             width_hint CONFIG[:table_column_width_hint] - 5
           }
-          grid_layout 1, true
+          grid_layout(1, true) {
+            horizontal_spacing 0
+            #margin_width 0
+          }
           @labels[:project_name] = label {
-            layout_data(:fill, :fill, true, true)
+            layout_data(:fill, :top, true, true)
             text 'Project'
           }
-          @texts[:project_name] = combo {              
-            layout_data(:fill, :fill, true, true)
+          @inputs[:project_name] = combo {              
+            layout_data(:fill, :top, true, true)
             selection bind(@task, :project_name)
             on_key_pressed { |event|
-              @texts[:task_type].swt_widget.set_focus if event.keyCode == swt(:cr)
+              @inputs[:task_type].swt_widget.set_focus if event.keyCode == swt(:cr)
             }
           }
         }
@@ -73,16 +84,19 @@ class AreWeThereYet
           layout_data(:fill, :fill, true, true) {
             width_hint CONFIG[:table_column_width_hint] - 5
           }
-          grid_layout 1, true
+          grid_layout(1, true) {
+            horizontal_spacing 0
+            #margin_width 0
+          }
           @labels[:task_type] = label {
-            layout_data(:fill, :fill, true, true)
+            layout_data(:fill, :top, true, true)
             text 'Type'
           }
-          @texts[:task_type] = combo {              
-            layout_data(:fill, :fill, true, true)
+          @inputs[:task_type] = combo {              
+            layout_data(:fill, :top, true, true)
             selection bind(@task, :task_type)
             on_key_pressed { |event|
-              @texts[:start_at].swt_widget.set_focus if event.keyCode == swt(:cr)
+              @inputs[:start_at].swt_widget.set_focus if event.keyCode == swt(:cr)
             }
           }
         }
@@ -90,16 +104,19 @@ class AreWeThereYet
           layout_data(:fill, :fill, true, true) {
             width_hint CONFIG[:table_column_width_hint] - 5
           }
-          grid_layout 1, true
-          @labels[:start_at] = label {
-            layout_data(:fill, :fill, true, true)
-            text 'Start Date/Time'
+          grid_layout(1, true) {
+            horizontal_spacing 0
+            #margin_width 0
           }
-          @texts[:start_at] = c_date_time(CDT::BORDER | CDT::COMPACT | CDT::DROP_DOWN | CDT::DATE_LONG | CDT::TIME_MEDIUM) {
-            layout_data(:fill, :fill, true, true)
+          @labels[:start_at] = label {
+            layout_data(:fill, :top, true, true)
+            text 'Start Date'
+          }
+          @inputs[:start_at] = c_date_time(CDT::BORDER | CDT::COMPACT | CDT::DROP_DOWN | CDT::DATE_LONG) {
+            layout_data(:fill, :top, true, true)
             selection bind(@task, :start_at)
             on_key_pressed { |event|
-              @texts[:duration].swt_widget.set_focus if event.keyCode == swt(:cr)
+              @inputs[:duration].swt_widget.set_focus if event.keyCode == swt(:cr)
             }
           }
         }
@@ -107,16 +124,19 @@ class AreWeThereYet
           layout_data(:fill, :fill, true, true) {
             width_hint CONFIG[:table_column_width_hint] - 5
           }
-          grid_layout 1, true
+          grid_layout(1, true) {
+            horizontal_spacing 0
+            #margin_width 0
+          }
           @labels[:duration] = label {
-            layout_data(:fill, :fill, true, true)
+            layout_data(:fill, :top, true, true)
             text 'Duration'
           }
-          @texts[:duration] = combo(:read_only) {
-            layout_data(:fill, :fill, true, true)
+          @inputs[:duration] = combo(:read_only) {
+            layout_data(:fill, :top, true, true)
             selection bind(@task, :duration)
             on_key_pressed { |event|
-              @texts[:end_at].swt_widget.set_focus if event.keyCode == swt(:cr)
+              @inputs[:end_at].swt_widget.set_focus if event.keyCode == swt(:cr)
             }
           }
         }
@@ -124,30 +144,36 @@ class AreWeThereYet
           layout_data(:fill, :fill, true, true) {
             width_hint CONFIG[:table_column_width_hint] - 5
           }
-          grid_layout 1, true
-          @labels[:end_at] = label {
-            layout_data(:fill, :fill, true, true)
-            text 'End Date/Time'
+          grid_layout(1, true) {
+            horizontal_spacing 0
+            #margin_width 0
           }
-          @texts[:end_at] = c_date_time(CDT::BORDER | CDT::COMPACT | CDT::DROP_DOWN | CDT::DATE_LONG | CDT::TIME_MEDIUM) {
-            layout_data(:fill, :fill, true, true)
+          @labels[:end_at] = label {
+            layout_data(:fill, :top, true, true)
+            text 'End Date'
+          }
+          @inputs[:end_at] = c_date_time(CDT::BORDER | CDT::COMPACT | CDT::DROP_DOWN | CDT::DATE_LONG) {
+            layout_data(:fill, :top, true, true)
             selection bind(@task, :end_at)
             on_key_pressed { |event|
-              @texts[:priority].swt_widget.set_focus if event.keyCode == swt(:cr)
+              @inputs[:priority].swt_widget.set_focus if event.keyCode == swt(:cr)
             }
           }
         }
         composite {
           layout_data(:fill, :fill, true, true) {
-            width_hint CONFIG[:table_column_width_hint] - 5  
+            width_hint CONFIG[:table_column_width_hint] - 5
           }
-          grid_layout 1, true
+          grid_layout(1, true) {
+            horizontal_spacing 0
+            #margin_width 0
+          }
           @labels[:priority] = label {
-            layout_data(:fill, :fill, true, true)
+            layout_data(:fill, :top, true, true)
             text 'Priority'
           }
-          @texts[:priority] = combo(:read_only) {
-            layout_data(:fill, :fill, true, true)
+          @inputs[:priority] = combo(:read_only) {
+            layout_data(:fill, :top, true, true)
             selection bind(@task, :priority)
             on_key_pressed { |event|
               if event.keyCode == swt(:cr)
@@ -155,9 +181,9 @@ class AreWeThereYet
                 new_task = @task.clone
                 if new_task.save
                   @task.reset
-                  @texts[:name].swt_widget.set_focus
+                  @inputs[:name].swt_widget.set_focus
                 else
-                  @texts[new_task.errors.keys.first].swt_widget.set_focus
+                  @inputs[new_task.errors.keys.first].swt_widget.set_focus
                 end
                 @labels.each do |attribute, label|
                   label.content {

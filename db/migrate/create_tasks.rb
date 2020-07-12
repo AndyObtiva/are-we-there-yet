@@ -9,7 +9,7 @@ class CreateTasks < ActiveRecord::Migration[5.2]
       t.integer    :position, auto_increment: true
       t.string     :name
       t.string     :task_type
-      t.timestamp  :start_at
+      t.date       :start_at
       t.string     :duration
       t.string     :priority
       t.boolean    :finished, default: false

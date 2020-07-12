@@ -65,10 +65,14 @@ class AreWeThereYet
       Time.at(super.to_java.time / 1000.0)
     end
 
+    def start_date
+      start_at&.strftime('%Y-%m-%d')
+    end
+    
     def end_at=(value)
-      return if value.nil? || start_at.nil?
+      return if value.nil?
       value = Time.at(value.to_java.time / 1000.0)
-      if value < start_at
+      if start_at.nil? || value < start_at
         calculated_start_at = value - duration_time
         self.start_at = calculated_start_at
       else
@@ -80,6 +84,10 @@ class AreWeThereYet
     def end_at
       return if start_at.nil?
       start_at + duration_time
+    end
+    
+    def end_date
+      end_at&.strftime('%Y-%m-%d')
     end
     
     def duration=(value)
