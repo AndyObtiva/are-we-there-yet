@@ -1,5 +1,4 @@
 require 'models/are_we_there_yet/task'
-require 'views/are_we_there_yet/gantt_chart_settings'
 require 'views/are_we_there_yet/task_form'
 require 'views/are_we_there_yet/task_table'
 require 'views/are_we_there_yet/preferences_dialog'
@@ -32,7 +31,6 @@ class AreWeThereYet
           display_preferences_dialog
         }
       }
-      @gantt_chart_settings = GanttChartSettings.new
     }
     
     ## Use after_body block to setup observers for widgets in body
@@ -41,7 +39,7 @@ class AreWeThereYet
       render_gantt_chart = lambda do |new_tasks|
         @gantt_chart.swt_widget.dispose
         @gantt_chart_container.content {
-          @gantt_chart = gantt_chart(GanttFlags::H_SCROLL_FIXED_RANGE, @gantt_chart_settings) {
+          @gantt_chart = gantt_chart(GanttFlags::H_SCROLL_FIXED_RANGE, @preferences_dialog&.gantt_chart_settings) {
             layout_data(:fill, :fill, true, true) {
               minimum_height GANTT_CHART_MINIMUM_HEIGHT
             }
@@ -61,7 +59,8 @@ class AreWeThereYet
             @last_gantt_event[project_name] = gantt_event
           end
         end
-        body_root.pack_same_size
+#         body_root.pack
+#         body_root.swt_widget.set_size 750, 550
       end
       observe(Task, :all, &render_gantt_chart) 
       render_gantt_chart.call(Task.all)
@@ -84,7 +83,7 @@ class AreWeThereYet
         sash_form(:vertical) {
           layout_data(:fill, :fill, true, true)
           @gantt_chart_container = composite { |container|
-            @gantt_chart = gantt_chart(GanttFlags::H_SCROLL_FIXED_RANGE, @gantt_chart_settings) {
+            @gantt_chart = gantt_chart(GanttFlags::H_SCROLL_FIXED_RANGE, @preferences_dialog&.gantt_chart_settings) {
               layout_data(:fill, :fill, true, true) {
                 minimum_height GANTT_CHART_MINIMUM_HEIGHT
               }
@@ -112,7 +111,8 @@ class AreWeThereYet
     end
     
     def display_preferences_dialog        
-      preferences_dialog(parent_shell_proxy: body_root).open
+      @preferences_dialog = preferences_dialog(parent_shell_proxy: body_root, gantt_chart_proxy: @gantt_chart)
+      @preferences_dialog.open      
     end
     
     def to_gantt_event(task)
