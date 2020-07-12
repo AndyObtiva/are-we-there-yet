@@ -45,14 +45,17 @@ class AreWeThereYet
             }
           }          
         }
-        @last_gantt_event = nil  
-        new_tasks.to_a.each do |task|
-          gantt_event = to_gantt_event(task)
-          if @last_gantt_event
-            @last_gantt_event.setCheckpoint(false)
-            @gantt_chart.swt_widget.addConnection(@last_gantt_event, gantt_event)
+        @last_gantt_event = {}
+        new_tasks.to_a.group_by(&:project_name).each do |project_name, project_tasks|
+          @last_gantt_event[project_name] = nil # TODO turn this into a project_name hash
+          project_tasks.each do |task|
+            gantt_event = to_gantt_event(task)
+            if @last_gantt_event[project_name]
+              @last_gantt_event[project_name].setCheckpoint(false)
+              @gantt_chart.swt_widget.addConnection(@last_gantt_event[project_name], gantt_event)
+            end
+            @last_gantt_event[project_name] = gantt_event
           end
-          @last_gantt_event = gantt_event
         end
       end
       observe(Task, :all, &render_gantt_chart) 
