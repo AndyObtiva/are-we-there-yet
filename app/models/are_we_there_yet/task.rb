@@ -1,22 +1,16 @@
 class AreWeThereYet
   class Task < ActiveRecord::Base
     include Glimmer::DataBinding::ObservableModel
-    after_create :notify_create
-    
-    class << self
-      include Glimmer::DataBinding::ObservableModel
-      
-      def notify_create
-        notify_observers('all')  
-      end      
-    end
+    extend Glimmer::DataBinding::ObservableModel      
+    after_create :notify_all
+    after_destroy :notify_all
     
     validates :name, presence: true
     validates :project_name, presence: true
     validates :task_type, presence: true
     
-    def notify_create
-      Task.notify_create
+    def notify_all
+      Task.notify_observers(:all)
     end
     
     def reset

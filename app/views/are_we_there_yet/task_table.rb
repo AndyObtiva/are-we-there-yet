@@ -64,6 +64,16 @@ class AreWeThereYet
             column.width = new_column_width
           end
         }
+        
+        menu {
+          menu_item {
+            text "Remove Task"
+            on_widget_selected {
+              swt_widget.selection.first.data.destroy
+              Task.notify_observers(:all)
+            }
+          }
+        }
       }    
     }
 
