@@ -24,6 +24,7 @@ class AreWeThereYet
       self.task_type = nil
       self.start_at = nil
       self.duration = nil
+      self.end_at = nil
       self.priority = nil
     end
     
@@ -36,14 +37,11 @@ class AreWeThereYet
     end
     
     def duration_options
-      (1..8).map do |h|
+      (1..24).map do |h|
         "#{h} hour#{'s' if h > 1}"
       end + 
-        (2..30).map do |d|
+        (2..62).map do |d|
           "#{d} days"
-        end + 
-        (2..3).map do |m|
-          "#{m} months"
         end
     end    
     
@@ -51,6 +49,47 @@ class AreWeThereYet
       %w[High Medium Low]
     end
     
+    # TODO override start_at= and duration= to make them auto-update 2 other fields in (start_at, duration, end_at) trio
+    
+    def start_at=(value)
+      unless value.nil?
+        value = Time.at(value.to_java.time / 1000.0)
+      end
+      super(value)
+      notify_observers(:end_at)
+    end
+    
+    def start_at
+      return if super.nil?
+      Time.at(super.to_java.time / 1000.0)
+    end
+
+    def end_at=(value)
+      return if value.nil? || start_at.nil?
+      value = Time.at(value.to_java.time / 1000.0)
+      if value < start_at
+        calculated_start_at = value - duration_time
+        self.start_at = calculated_start_at
+      else
+        calculated_duration_time = value - start_at
+        self.duration_time = calculated_duration_time
+      end
+    end
+    
+    def end_at
+      return if start_at.nil?
+      start_at + duration_time
+    end
+    
+    def duration=(value)
+      super(value)
+      notify_observers(:end_at)
+    end
+    
+    def duration_time
+      duration_in_hours * 60 * 60
+    end
+        
     def duration_in_hours
       value = duration.to_s
       if value.include?('hour')
@@ -62,22 +101,14 @@ class AreWeThereYet
       end
       value.to_i
     end
-
-    # TODO expose and finish this     
-#     def end_at=(value)
-#       duration_time = value - start_at
-#       duration_in_hours = (duration_time / (60.0 * 60)).to_i
-#       if duration_in_hours <= 8
-#         self.duration = "#{duration_in_hours} hour#{'s' if duration_in_hours > 1}"
-#       elsif duration_in_hours <= 30*24
-#         self.duration = "#{(duration_in_hours/24.0).to_i} days"
-#       else duration_in_hours <= 30*24
-#         self.duration = "#{(duration_in_hours/(24.0*30)).to_i} months"
-#       end
-#     end
     
-    def end_at
-      start_at + duration_in_hours * 60 * 60
+    def duration_time=(value)
+      duration_in_hours = (value / (60.0 * 60)).to_i
+      if duration_in_hours <= 24
+        self.duration = "#{duration_in_hours} hour#{'s' if duration_in_hours > 1}"
+      elsif duration_in_hours <= 62*24
+        self.duration = "#{(duration_in_hours/24.0).to_i} days"
+      end
     end
   end
 end

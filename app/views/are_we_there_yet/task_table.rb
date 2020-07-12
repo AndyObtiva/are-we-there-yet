@@ -26,32 +26,36 @@ class AreWeThereYet
     #
     body {
       table {
-        layout_data :fill, :fill, true, true
+        # TODO Make resizing table columns auto-resize form fields        
         table_column {
           text 'Task'
-          width CONFIG[:table_column_width]
+          width CONFIG[:table_column_width_hint]
         }
         table_column {
           text 'Project'
-          width CONFIG[:table_column_width]
+          width CONFIG[:table_column_width_hint]
         }
         table_column {
           text 'Type'
-          width CONFIG[:table_column_width]
+          width CONFIG[:table_column_width_hint]
         }
         table_column {
           text 'Start Date/Time'
-          width CONFIG[:table_column_width]
+          width CONFIG[:table_column_width_hint]
         }
         table_column {
           text 'Duration (hours)'
-          width CONFIG[:table_column_width]
+          width CONFIG[:table_column_width_hint]
+        }
+        table_column {
+          text 'End Date/Time'
+          width CONFIG[:table_column_width_hint]
         }
         table_column {
           text 'Priority'
-          width CONFIG[:table_column_width]
+          width CONFIG[:table_column_width_hint]
         }
-        items bind(Task, :all, on_read: :to_a), column_properties(:name, :project_name, :task_type, :start_at, :duration, :priority)
+        items bind(Task, :all, on_read: :to_a), column_properties(:name, :project_name, :task_type, :start_at, :duration, :end_at, :priority)
         on_control_resized {
           window_width = body_root.swt_widget.shell.bounds.width
           columns = body_root.swt_widget.columns

@@ -65,7 +65,7 @@ class AreWeThereYet
     body {
       shell {
         # Replace example content below with custom shell content
-        minimum_size 320, 240
+        minimum_size 750, 550
         text "Are We There Yet?"
         grid_layout {
           margin_width 5
@@ -83,8 +83,12 @@ class AreWeThereYet
             }
           }
           composite {
-            task_form
-            task_table
+            task_form {
+              layout_data :fill, :fill, true, true            
+            }
+            task_table {
+              layout_data :fill, :fill, true, true
+            }
           }
         }
       }
