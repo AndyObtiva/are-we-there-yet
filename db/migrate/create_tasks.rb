@@ -15,15 +15,15 @@ class CreateTasks < ActiveRecord::Migration[5.2]
       t.boolean    :finished, default: false
     end
     
-    8.times do |n|
+    9.times do |n|
       AreWeThereYet::Task.create!(
-        project_name: ['MVP', 'V2', 'V3'][n%3],
+        project_name: ['Interior', 'Exterior', 'Roof'][n%3],
         position:     n,
-        name:         "Task #{n}",
-        task_type:    'Development',
+        name:         ["Purchase ##{n+1}", "Custom Design ##{n+1}", "Installation ##{n+1}"][n/3%3],
+        task_type:    ['Procurement', 'Design', 'Decoration'][n%3],
         start_at:     (Time.now - 30*24*60*60) + n*4*24*60*60,
-        duration:     '4 days',
-        priority:     'High',
+        duration:     ['4 days', '2 days', '7 days'][n/3%3],
+        priority:     ['High', 'Medium', 'Low'][n%3],
         finished:     false,
       )
     end    

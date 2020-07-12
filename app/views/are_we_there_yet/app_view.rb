@@ -10,6 +10,8 @@ class AreWeThereYet
   class AppView        
     include Glimmer::UI::CustomShell
     
+    GANTT_CHART_MINIMUM_HEIGHT = 297
+    
     ## Add options like the following to configure CustomShell by outside consumers
     #
     # options :title, :background_color
@@ -41,7 +43,7 @@ class AreWeThereYet
         @gantt_chart_container.content {
           @gantt_chart = gantt_chart(GanttFlags::H_SCROLL_FIXED_RANGE, @gantt_chart_settings) {
             layout_data(:fill, :fill, true, true) {
-              minimum_height 200
+              minimum_height GANTT_CHART_MINIMUM_HEIGHT
             }
           }          
         }
@@ -53,7 +55,7 @@ class AreWeThereYet
             gantt_event = to_gantt_event(task)
             gantt_section.add_gantt_event(gantt_event)
             if @last_gantt_event[project_name]
-              @last_gantt_event[project_name].setCheckpoint(false)
+#               @last_gantt_event[project_name].setCheckpoint(false)
               @gantt_chart.swt_widget.addConnection(@last_gantt_event[project_name], gantt_event)
             end
             @last_gantt_event[project_name] = gantt_event
@@ -84,7 +86,7 @@ class AreWeThereYet
           @gantt_chart_container = composite { |container|
             @gantt_chart = gantt_chart(GanttFlags::H_SCROLL_FIXED_RANGE, @gantt_chart_settings) {
               layout_data(:fill, :fill, true, true) {
-                minimum_height 200
+                minimum_height GANTT_CHART_MINIMUM_HEIGHT
               }
             }
           }
@@ -119,7 +121,7 @@ class AreWeThereYet
       end_date_time = Calendar.getInstance # TODO move to Task class
       end_date_time.set(task.end_at.year, task.end_at.month, task.end_at.day, task.end_at.hour, task.end_at.min, task.end_at.sec)         
       gantt_event = GanttEvent.new(@gantt_chart.swt_widget, task.name, start_date_time, end_date_time, task.finished? ? 100 : 0) # TODO support percent complete
-      gantt_event.setCheckpoint(true)
+#       gantt_event.setCheckpoint(true)
       gantt_event
     end
     
