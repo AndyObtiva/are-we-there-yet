@@ -17,7 +17,7 @@ class CreateTasks < ActiveRecord::Migration[5.2]
     
     8.times do |n|
       AreWeThereYet::Task.create!(
-        project_name: 'MVP',
+        project_name: ['MVP', 'V2', 'V3'][n%3],
         position:     n,
         name:         "Task #{n}",
         task_type:    'Development',

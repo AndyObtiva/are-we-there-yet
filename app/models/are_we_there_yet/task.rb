@@ -1,5 +1,6 @@
 class AreWeThereYet
   class Task < ActiveRecord::Base
+    include Glimmer::DataBinding::ObservableModel
     after_create :notify_create
     
     class << self
