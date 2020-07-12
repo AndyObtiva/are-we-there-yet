@@ -48,8 +48,10 @@ class AreWeThereYet
         @last_gantt_event = {}
         new_tasks.to_a.group_by(&:project_name).each do |project_name, project_tasks|
           @last_gantt_event[project_name] = nil # TODO turn this into a project_name hash
+          gantt_section = GanttSection.new(@gantt_chart.swt_widget, project_name)
           project_tasks.each do |task|
             gantt_event = to_gantt_event(task)
+            gantt_section.add_gantt_event(gantt_event)
             if @last_gantt_event[project_name]
               @last_gantt_event[project_name].setCheckpoint(false)
               @gantt_chart.swt_widget.addConnection(@last_gantt_event[project_name], gantt_event)
@@ -57,6 +59,7 @@ class AreWeThereYet
             @last_gantt_event[project_name] = gantt_event
           end
         end
+        body_root.pack_same_size
       end
       observe(Task, :all, &render_gantt_chart) 
       render_gantt_chart.call(Task.all)

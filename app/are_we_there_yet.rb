@@ -15,6 +15,7 @@ Glimmer::Config.import_swt_packages += [
   'org.eclipse.nebula.cwt',
   'org.eclipse.nebula.widgets.cdatetime',
   'org.eclipse.nebula.widgets.ganttchart',
+  'org.eclipse.nebula.widgets.ganttchart.themes',
 ]
 
 require 'views/are_we_there_yet/app_view'
