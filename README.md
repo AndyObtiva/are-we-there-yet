@@ -18,8 +18,8 @@ Simply enter tasks and see them reflected in the project progress Gantt Chart.
 Development may be tracked in [GitHub Projects](https://github.com/AndyObtiva/are-we-there-yet/projects/1).
 
 Upcoming Releases:
-- [v0.5.0 (Alpha)](https://github.com/AndyObtiva/are-we-there-yet/projects/1?card_filter_query=milestone%3A%22v0.5.0+%28Alpha%29%22)
-- [v1.0.0 (MVP)](https://github.com/AndyObtiva/are-we-there-yet/projects/1?card_filter_query=milestone%3A%22v1.0.0+%28MVP%29%22)
+- [v0.5.0 (Alpha)](https://github.com/AndyObtiva/are-we-there-yet/projects/1?card_filter_query=milestone%3A%22v0.5.0+%28Alpha%29%22) on 2020-07-15
+- [v1.0.0 (MVP)](https://github.com/AndyObtiva/are-we-there-yet/projects/1?card_filter_query=milestone%3A%22v1.0.0+%28MVP%29%22) on 2020-07-19
 
 ### License
 
