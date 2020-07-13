@@ -5,7 +5,7 @@ Simply enter tasks and see them reflected in the project progress Gantt Chart.
 
 ![Are We There Yet Screenshot](are-we-there-yet-screenshot.png)
 
-**Note**: this project is still work in progress.
+**Note**: this project is still work in progress. [Download v0.5.0 (Alpha)](https://www.dropbox.com/s/g8m3dg5xrcpfzs6/Are%20We%20There%20Yet-0.5.0.dmg?dl=1)
 
 ### Initial Plan
 
