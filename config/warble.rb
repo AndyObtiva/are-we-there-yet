@@ -13,7 +13,7 @@ Warbler::Config.new do |config|
   # config.features = %w(gemjar)
 
   # Application directories to be included in the webapp.
-  config.dirs = %w(app config db lib script bin docs fonts icons images sounds videos)
+  config.dirs = %w(app config db lib script bin docs fonts icons images sounds videos vendor)
 
   # Additional files/directories to include, above those in config.dirs
   config.includes = FileList['LICENSE.txt', 'VERSION']
