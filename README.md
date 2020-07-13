@@ -7,15 +7,15 @@ Simply enter tasks and see them reflected in the project progress Gantt Chart.
 
 **Note**: this project is still work in progress.
 
-### Development Releases
-
-You may track this app's development under [GitHub Projects](https://github.com/AndyObtiva/are-we-there-yet/projects/1).
-
 ### Initial Plan
 
 “Plans are nothing; planning is everything” - Former US President Dwight D Eisenhower
 
 [INITIAL_PLAN.md](INITIAL_PLAN.md)
+
+### Development
+
+Development may be tracked in [GitHub Projects](https://github.com/AndyObtiva/are-we-there-yet/projects/1).
 
 ### License
 
