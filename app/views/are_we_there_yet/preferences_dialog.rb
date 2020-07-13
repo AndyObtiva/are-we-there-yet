@@ -9,7 +9,7 @@ class AreWeThereYet
     # options :title, :background_color
     # option :width, default: 320
     # option :height, default: 240
-    options :parent_shell_proxy
+    options :parent_shell_proxy, :current_settings
     
     attr_reader :gantt_chart_settings
 
@@ -17,7 +17,7 @@ class AreWeThereYet
     #
     #
     before_body {
-      @gantt_chart_settings = GanttChartSettings.new
+      @gantt_chart_settings = GanttChartSettings.new(current_settings)
     }
 
     ## Use after_body block to setup observers for widgets in body

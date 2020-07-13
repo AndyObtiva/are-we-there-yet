@@ -39,7 +39,7 @@ class AreWeThereYet
       render_gantt_chart = lambda do |new_tasks|
         @gantt_chart.swt_widget.dispose
         @gantt_chart_container.content {
-          @gantt_chart = gantt_chart(GanttFlags::H_SCROLL_FIXED_RANGE, @preferences_dialog&.gantt_chart_settings) {
+          @gantt_chart = gantt_chart(GanttFlags::H_SCROLL_FIXED_RANGE, gantt_chart_settings) {
             layout_data(:fill, :fill, true, true) {
               minimum_height GANTT_CHART_MINIMUM_HEIGHT
             }
@@ -53,14 +53,11 @@ class AreWeThereYet
             gantt_event = to_gantt_event(task)
             gantt_section.add_gantt_event(gantt_event)
             if @last_gantt_event[project_name]
-#               @last_gantt_event[project_name].setCheckpoint(false)
               @gantt_chart.swt_widget.addConnection(@last_gantt_event[project_name], gantt_event)
             end
             @last_gantt_event[project_name] = gantt_event
           end
         end
-#         body_root.pack
-#         body_root.swt_widget.set_size 750, 550
       end
       observe(Task, :all, &render_gantt_chart) 
       render_gantt_chart.call(Task.all)
@@ -83,7 +80,7 @@ class AreWeThereYet
         sash_form(:vertical) {
           layout_data(:fill, :fill, true, true)
           @gantt_chart_container = composite { |container|
-            @gantt_chart = gantt_chart(GanttFlags::H_SCROLL_FIXED_RANGE, @preferences_dialog&.gantt_chart_settings) {
+            @gantt_chart = gantt_chart(GanttFlags::H_SCROLL_FIXED_RANGE, gantt_chart_settings) {
               layout_data(:fill, :fill, true, true) {
                 minimum_height GANTT_CHART_MINIMUM_HEIGHT
               }
@@ -100,6 +97,10 @@ class AreWeThereYet
         }
       }
     }
+    
+    def gantt_chart_settings
+      @preferences_dialog&.gantt_chart_settings || GanttChartSettings.new
+    end
 
     def display_about_dialog
       message_box = MessageBox.new(swt_widget)
@@ -111,7 +112,7 @@ class AreWeThereYet
     end
     
     def display_preferences_dialog        
-      @preferences_dialog = preferences_dialog(parent_shell_proxy: body_root, gantt_chart_proxy: @gantt_chart)
+      @preferences_dialog = preferences_dialog(parent_shell_proxy: body_root, current_settings: @gantt_chart.swt_widget.settings)
       @preferences_dialog.open      
     end
     
@@ -121,7 +122,6 @@ class AreWeThereYet
       end_date_time = Calendar.getInstance # TODO move to Task class
       end_date_time.set(task.end_at.year, task.end_at.month, task.end_at.day, task.end_at.hour, task.end_at.min, task.end_at.sec)         
       gantt_event = GanttEvent.new(@gantt_chart.swt_widget, task.name, start_date_time, end_date_time, task.finished? ? 100 : 0) # TODO support percent complete
-#       gantt_event.setCheckpoint(true)
       gantt_event
     end
     
