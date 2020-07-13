@@ -58,7 +58,7 @@ Are We There Yet? aims to be an alternative that provides a quick "at a glance" 
 
 - MVP (Model-View-Presenter) pattern by relying on [Glimmer](https://github.com/AndyObtiva/glimmer) GUI and its [bidirectional data-binding support](https://github.com/AndyObtiva/glimmer#data-binding). 
 - Progress chart will be implemented as a Gantt Chart via the [Nebula Gantt Chart SWT widget](https://www.eclipse.org/nebula/snippets.php#GanttChart). It will be wrapped as a [Glimmer Custom Widget Gem](https://github.com/AndyObtiva/glimmer#custom-widget-gem) first.
-- Data-storage and retrieval performance requirements are very small, so any database system would do. Decided to go with the Mac built-in [SQlite](https://www.sqlite.org/famous.html) and the [ActiveRecord](https://github.com/rails/rails/tree/master/activerecord) ORM.
+- Data-storage and retrieval performance requirements are very small, so any database system would do. Decided to go with [SQLite](https://www.sqlite.org/famous.html) (included in MacOS) and the [ActiveRecord](https://github.com/rails/rails/tree/master/activerecord) ORM.
 
 ## Author
 
