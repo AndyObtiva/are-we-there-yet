@@ -13,9 +13,12 @@ Simply enter tasks and see them reflected in the project progress Gantt Chart.
 
 [INITIAL_PLAN.md](INITIAL_PLAN.md)
 
-### Development
+### Releases
 
 Development may be tracked in [GitHub Projects](https://github.com/AndyObtiva/are-we-there-yet/projects/1).
+
+Upcoming Releases:
+- [v1.0.0 (MVP)](https://github.com/AndyObtiva/are-we-there-yet/projects/1?card_filter_query=milestone%3A%22v1.0.0+%28MVP%29%22)
 
 ### License
 
