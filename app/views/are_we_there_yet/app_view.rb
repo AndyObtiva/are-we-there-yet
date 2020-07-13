@@ -98,6 +98,7 @@ class AreWeThereYet
               layout_data :fill, :fill, true, true
             }
           }
+#           weights [1, 2]
         }
       }
     }
