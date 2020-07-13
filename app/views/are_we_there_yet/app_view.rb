@@ -1,5 +1,5 @@
 require 'models/are_we_there_yet/task'
-require 'views/are_we_there_yet/gantt_chart_settings'
+require 'models/are_we_there_yet/gantt_chart_settings'
 require 'views/are_we_there_yet/task_form'
 require 'views/are_we_there_yet/task_table'
 require 'views/are_we_there_yet/preferences_dialog'
