@@ -69,3 +69,6 @@ Are We There Yet? aims to be an alternative that provides a quick "at a glance" 
 [MIT License](LICENSE.txt)
 
 Copyright (c) 2020 - Are We There Yet? by [Andy Maleh](https://github.com/AndyObtiva)
+
+Are We There Yet? logo was made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+
