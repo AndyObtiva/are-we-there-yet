@@ -8,6 +8,9 @@ class AreWeThereYet
     validates :name, presence: true
     validates :project_name, presence: true
     validates :task_type, presence: true
+    validates :start_at, presence: true
+    validates :duration, presence: true
+    validates :priority, presence: true
     
     def notify_all
       Task.notify_observers(:all)
