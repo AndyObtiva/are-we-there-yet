@@ -1,9 +1,8 @@
 class AreWeThereYet
   class Task < ActiveRecord::Base
     include Glimmer::DataBinding::ObservableModel
-    extend Glimmer::DataBinding::ObservableModel      
-    after_create :notify_all
-    after_destroy :notify_all
+    after_create :task_list_changed
+    after_destroy :task_list_changed
     
     validates :name, presence: true
     validates :project_name, presence: true
@@ -12,8 +11,74 @@ class AreWeThereYet
     validates :duration, presence: true
     validates :priority, presence: true
     
-    def notify_all
-      Task.notify_observers(:all)
+    FILTERS = [:name_filter, :project_name_filter, :task_type_filter, :start_at_filter, :duration_filter, :end_at_filter, :priority_filter]
+    
+    class << self
+      include Glimmer::DataBinding::ObservableModel      
+      attr_accessor *FILTERS
+      
+#       def name_filter=(val)
+#         pd "Name Filter Changed: #{val}"
+#         @name_filter = val
+#         task_list_changed
+#       end
+#       
+#       def priority_filter=(val)
+#         pd "Priority Filter Changed: #{val}"
+#         @priority_filter = val
+#         task_list_changed
+#       end
+#       
+      def task_list_changed
+        notify_observers(:all)
+        notify_observers(:list)
+      end
+
+      def project_name_filter_options
+        pluck(:project_name).uniq.sort
+      end
+      
+      def task_type_filter_options
+        pluck(:task_type).uniq.sort
+      end
+      
+      def duration_filter_options
+        (1..24).map do |h|
+          "#{h} hour#{'s' if h > 1}"
+        end + 
+          (2..62).map do |d|
+            "#{d} days"
+          end
+      end    
+      
+      def priority_filter_options
+        ['', 'High', 'Medium', 'Low']
+      end
+                  
+      def list
+        pd 'listing...', header: true
+        all.to_a.select do |task|
+          task.name.to_s.downcase.include?(name_filter.to_s.downcase)
+        end.select do |task|
+          task.priority.to_s.downcase.include?(priority_filter.to_s.downcase)
+        end
+      end
+      
+      FILTERS.each_with_index do |filter, i|
+        if i == 6
+          observer = Glimmer::DataBinding::Observer.proc do |new_value|
+            pd new_value
+            Task.task_list_changed
+          end
+          pd observer
+          observer.observe(Task, filter)
+          pd Task, announcer: '[MODEL]'
+        end
+      end
+    end
+    
+    def task_list_changed
+      Task.task_list_changed
     end
     
     def reset
@@ -27,24 +92,19 @@ class AreWeThereYet
     end
     
     def project_name_options
-      Task.pluck(:project_name).uniq.sort
+      Task.project_name_filter_options
     end
     
     def task_type_options
-      Task.pluck(:task_type).uniq.sort
+      Task.task_type_filter_options
     end
     
     def duration_options
-      (1..24).map do |h|
-        "#{h} hour#{'s' if h > 1}"
-      end + 
-        (2..62).map do |d|
-          "#{d} days"
-        end
+      Task.duration_filter_options
     end    
     
     def priority_options
-      %w[High Medium Low]
+      Task.priority_filter_options
     end
     
     # TODO override start_at= and duration= to make them auto-update 2 other fields in (start_at, duration, end_at) trio

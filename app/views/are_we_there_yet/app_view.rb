@@ -1,6 +1,7 @@
 require 'models/are_we_there_yet/task'
 require 'models/are_we_there_yet/gantt_chart_settings'
 require 'views/are_we_there_yet/task_form'
+require 'views/are_we_there_yet/filter_form'
 require 'views/are_we_there_yet/task_table'
 require 'views/are_we_there_yet/preferences_dialog'
 
@@ -83,6 +84,7 @@ class AreWeThereYet
         }
         sash_form(:vertical) {
           layout_data(:fill, :fill, true, true)
+          sash_width 10          
           @gantt_chart_container = composite { |container|
             @gantt_chart = gantt_chart(GanttFlags::H_SCROLL_FIXED_RANGE, @gantt_chart_settings) {
               layout_data(:fill, :fill, true, true) {
@@ -94,11 +96,14 @@ class AreWeThereYet
             task_form {
               layout_data :fill, :fill, true, true            
             }
+            filter_form {
+              layout_data :fill, :fill, true, true            
+            }
             task_table {
               layout_data :fill, :fill, true, true
             }
           }
-#           weights [1, 2]
+          weights [1, 2]
         }
       }
     }

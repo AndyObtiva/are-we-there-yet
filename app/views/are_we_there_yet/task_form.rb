@@ -1,7 +1,5 @@
 require 'models/are_we_there_yet/task'
 
-java_import 'java.util.Calendar'
-
 class AreWeThereYet  
   class TaskForm
     include Glimmer::UI::CustomWidget

@@ -55,7 +55,7 @@ class AreWeThereYet
           text 'Priority'
           width CONFIG[:table_column_width_hint]
         }
-        items bind(Task, :all, on_read: :to_a), column_properties(:name, :project_name, :task_type, :start_date, :duration, :end_date, :priority)
+        items bind(Task, :list), column_properties(:name, :project_name, :task_type, :start_date, :duration, :end_date, :priority)
         on_control_resized {
           window_width = body_root.swt_widget.shell.bounds.width
           columns = body_root.swt_widget.columns
@@ -70,7 +70,6 @@ class AreWeThereYet
             text "Remove Task"
             on_widget_selected {
               swt_widget.selection.first.data.destroy
-              Task.notify_observers(:all)
             }
           }
         }
