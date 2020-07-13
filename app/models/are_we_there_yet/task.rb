@@ -17,35 +17,24 @@ class AreWeThereYet
       include Glimmer::DataBinding::ObservableModel      
       attr_accessor *FILTERS
       
-#       def name_filter=(val)
-#         pd "Name Filter Changed: #{val}"
-#         @name_filter = val
-#         task_list_changed
-#       end
-#       
-#       def priority_filter=(val)
-#         pd "Priority Filter Changed: #{val}"
-#         @priority_filter = val
-#         task_list_changed
-#       end
-#       
       def task_list_changed
         notify_observers(:all)
         notify_observers(:list)
       end
 
       def project_name_filter_options
-        pluck(:project_name).uniq.sort
+        [''] + pluck(:project_name).uniq.sort
       end
       
       def task_type_filter_options
-        pluck(:task_type).uniq.sort
+        [''] + pluck(:task_type).uniq.sort
       end
       
       def duration_filter_options
-        (1..24).map do |h|
-          "#{h} hour#{'s' if h > 1}"
-        end + 
+        [''] + 
+          (1..24).map do |h|
+            "#{h} hour#{'s' if h > 1}"
+          end + 
           (2..62).map do |d|
             "#{d} days"
           end
@@ -56,24 +45,19 @@ class AreWeThereYet
       end
                   
       def list
-        pd 'listing...', header: true
-        all.to_a.select do |task|
-          task.name.to_s.downcase.include?(name_filter.to_s.downcase)
-        end.select do |task|
-          task.priority.to_s.downcase.include?(priority_filter.to_s.downcase)
+        result = all.to_a
+        FILTERS.each do |filter|
+          result = result.select do |task|
+            task.send(filter.to_s.sub('_filter', '')).to_s.downcase.include?(Task.send(filter).to_s.downcase)
+          end
         end
+        result
       end
       
       FILTERS.each_with_index do |filter, i|
-        if i == 6
-          observer = Glimmer::DataBinding::Observer.proc do |new_value|
-            pd new_value
-            Task.task_list_changed
-          end
-          pd observer
-          observer.observe(Task, filter)
-          pd Task, announcer: '[MODEL]'
-        end
+        Glimmer::DataBinding::Observer.proc do |new_value|
+          Task.task_list_changed
+        end.observe(Task, filter)
       end
     end
     
