@@ -190,12 +190,14 @@ class AreWeThereYet
             }
           }
         }
+        
         button {
           text 'Save Task'
           on_widget_selected {
             add_task
           }
         }
+        
       }
     }
     

@@ -54,6 +54,12 @@ class AreWeThereYet
         result
       end
       
+      def reset_filters
+        FILTERS.each do |filter|
+          Task.send("#{filter}=", nil)
+        end
+      end
+      
       FILTERS.each_with_index do |filter, i|
         Glimmer::DataBinding::Observer.proc do |new_value|
           Task.task_list_changed

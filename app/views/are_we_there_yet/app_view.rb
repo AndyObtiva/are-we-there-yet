@@ -43,12 +43,9 @@ class AreWeThereYet
       render_gantt_chart = lambda do |new_tasks|
         @gantt_chart.swt_widget.dispose
         @gantt_chart_container.content {
-          @gantt_chart = gantt_chart(GanttFlags::H_SCROLL_FIXED_RANGE, @gantt_chart_settings) {
-            layout_data(:fill, :fill, true, true) {
-              minimum_height GANTT_CHART_MINIMUM_HEIGHT
-            }
-          }          
+          @gantt_chart = gantt_chart(GanttFlags::H_SCROLL_FIXED_RANGE, @gantt_chart_settings)
         }
+        @gantt_chart_container.swt_widget.set_content @gantt_chart.swt_widget
         @last_gantt_event = {}
         new_tasks.to_a.group_by(&:project_name).each do |project_name, project_tasks|
           @last_gantt_event[project_name] = nil # TODO turn this into a project_name hash
@@ -62,7 +59,6 @@ class AreWeThereYet
             @last_gantt_event[project_name] = gantt_event
           end
         end
-        body_root.pack_same_size
       end
       observe(Task, :all, &render_gantt_chart) 
       render_gantt_chart.call(Task.all)
@@ -85,12 +81,11 @@ class AreWeThereYet
         sash_form(:vertical) {
           layout_data(:fill, :fill, true, true)
           sash_width 10          
-          @gantt_chart_container = composite { |container|
-            @gantt_chart = gantt_chart(GanttFlags::H_SCROLL_FIXED_RANGE, @gantt_chart_settings) {
-              layout_data(:fill, :fill, true, true) {
-                minimum_height GANTT_CHART_MINIMUM_HEIGHT
-              }
-            }
+          @gantt_chart_container = scrolled_composite(:h_scroll, :v_scroll) { |container|
+            @gantt_chart = gantt_chart(GanttFlags::H_SCROLL_FIXED_RANGE, @gantt_chart_settings)
+            container.swt_widget.set_expand_horizontal(true)
+            container.swt_widget.set_expand_vertical(true)
+            container.swt_widget.set_content @gantt_chart.swt_widget
           }
           composite {
             task_form {

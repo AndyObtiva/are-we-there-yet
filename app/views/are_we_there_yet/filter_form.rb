@@ -184,6 +184,14 @@ class AreWeThereYet
             }
           }
         }
+
+        button {
+          text 'Reset Filters'
+          on_widget_selected {
+            Task.reset_filters
+          }
+        }
+
       }
     }
     
