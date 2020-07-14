@@ -72,6 +72,7 @@ class AreWeThereYet
     end
     
     def reset
+      self.id = nil
       self.name = nil
       self.project_name = nil
       self.task_type = nil
