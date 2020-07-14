@@ -6,3 +6,4 @@ Add miscellaneous tasks and issues here.
 - Have an archived task tab
 - Fix form field alignment with table columns
 - Fix window maximization (and resizing) layout issues
+- Add a menu with theme configuration as an option
