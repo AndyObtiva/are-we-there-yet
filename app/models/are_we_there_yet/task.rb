@@ -12,6 +12,10 @@ class AreWeThereYet
     validates :priority, presence: true
     
     FILTERS = [:name_filter, :project_name_filter, :task_type_filter, :start_at_filter, :duration_filter, :end_at_filter, :priority_filter]
+    TYPE_FILTERS = {
+      String => lambda { |value, filter_value| value.to_s.downcase.include?(filter_value.to_s.downcase) },
+      Time => lambda { |value, filter_value| filter_value.nil? || value&.strftime('%Y-%m-%d') == filter_value.strftime('%Y-%m-%d') },
+    }
     
     class << self
       include Glimmer::DataBinding::ObservableModel      
@@ -20,6 +24,20 @@ class AreWeThereYet
       def task_list_changed
         notify_observers(:all)
         notify_observers(:list)
+      end
+      
+      def start_at_filter=(value)
+        unless value.nil?
+          value = Time.at(value.to_java.time / 1000.0) # TODO add to a Ruby extension or refinement (consider contributing to JRuby)
+        end
+        @start_at_filter = value
+      end
+
+      def end_at_filter=(value)
+        unless value.nil?
+          value = Time.at(value.to_java.time / 1000.0)
+        end
+        @end_at_filter = value
       end
 
       def project_name_filter_options
@@ -48,7 +66,9 @@ class AreWeThereYet
         result = all.to_a
         FILTERS.each do |filter|
           result = result.select do |task|
-            task.send(filter.to_s.sub('_filter', '')).to_s.downcase.include?(Task.send(filter).to_s.downcase)
+            value = task.send(filter.to_s.sub('_filter', ''))
+            filter_value = Task.send(filter)
+            TYPE_FILTERS[value.class].call(value, filter_value)
           end
         end
         result
@@ -60,7 +80,7 @@ class AreWeThereYet
         end
       end
       
-      FILTERS.each_with_index do |filter, i|
+      FILTERS.each do |filter|
         Glimmer::DataBinding::Observer.proc do |new_value|
           Task.task_list_changed
         end.observe(Task, filter)
@@ -97,8 +117,6 @@ class AreWeThereYet
     def priority_options
       Task.priority_filter_options
     end
-    
-    # TODO override start_at= and duration= to make them auto-update 2 other fields in (start_at, duration, end_at) trio
     
     def start_at=(value)
       unless value.nil?

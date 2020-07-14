@@ -35,6 +35,7 @@ class AreWeThereYet
         font height: 12, style: :bold
         grid_layout {
           horizontal_spacing 0
+          vertical_spacing 0
           margin_width 0
           margin_height 0
         }
