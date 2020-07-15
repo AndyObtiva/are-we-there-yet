@@ -81,11 +81,8 @@ class AreWeThereYet
         sash_form(:vertical) {
           layout_data(:fill, :fill, true, true)
           sash_width 10          
-          @gantt_chart_container = scrolled_composite(:h_scroll, :v_scroll) { |container|
+          @gantt_chart_container = scrolled_composite { |container|
             @gantt_chart = gantt_chart(GanttFlags::H_SCROLL_FIXED_RANGE, @gantt_chart_settings)
-            container.swt_widget.set_expand_horizontal(true)
-            container.swt_widget.set_expand_vertical(true)
-            container.swt_widget.set_content @gantt_chart.swt_widget
           }
           composite {
             task_form {

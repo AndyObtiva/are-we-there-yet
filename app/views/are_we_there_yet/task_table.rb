@@ -46,6 +46,7 @@ class AreWeThereYet
         table_column {
           text 'Duration (hours)'
           width CONFIG[:table_column_width_hint]
+          sort_property :duration_in_hours
         }
         table_column {
           text 'End Date'
@@ -54,6 +55,7 @@ class AreWeThereYet
         table_column {
           text 'Priority'
           width CONFIG[:table_column_width_hint]
+          sort_by {|value| ['High', 'Medium', 'Low'].index(value) }
         }
         items bind(Task, :list), column_properties(:name, :project_name, :task_type, :start_date, :duration, :end_date, :priority)
         on_control_resized {

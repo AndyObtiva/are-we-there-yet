@@ -63,15 +63,19 @@ class AreWeThereYet
       end
                   
       def list
-        result = all.to_a
+        @list = all.to_a if @list.to_a.size != count
         FILTERS.each do |filter|
-          result = result.select do |task|
+          @list = @list.select do |task|
             value = task.send(filter.to_s.sub('_filter', ''))
             filter_value = Task.send(filter)
             TYPE_FILTERS[value.class].call(value, filter_value)
           end
         end
-        result
+        @list
+      end
+      
+      def list=(new_list)
+        @list = new_list
       end
       
       def reset_filters
