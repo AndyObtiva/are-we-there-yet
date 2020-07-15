@@ -3,7 +3,11 @@
 
 Simply enter tasks and see them reflected in the project progress Gantt Chart.
 
+Mac Screenshot:
 ![Are We There Yet Screenshot](are-we-there-yet-screenshot.png)
+
+Windows Screenshot:
+![Are We There Yet Screenshot Windows](are-we-there-yet-screenshot-windows.png)
 
 [<img src="https://raw.githubusercontent.com/AndyObtiva/are-we-there-yet/master/are-we-there-yet-logo.svg" height=20 /> Download v0.7.0 (Alpha)](https://www.dropbox.com/s/8wl8fhtz5sma3jk/Are%20We%20There%20Yet-0.7.0.dmg?dl=1)
 
