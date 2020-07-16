@@ -104,6 +104,8 @@ class AreWeThereYet
       self.duration = nil
       self.end_at = nil
       self.priority = nil
+      notify_observers(:project_name_options)
+      notify_observers(:task_type_options)
     end
     
     def project_name_options
