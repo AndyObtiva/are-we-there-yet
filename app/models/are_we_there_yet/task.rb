@@ -134,7 +134,7 @@ class AreWeThereYet
     
     def start_at
       return if super.nil?
-      Time.at(super.to_java.time / 1000.0)
+      Time.at(super.to_time.localtime.to_java.time / 1000.0).localtime
     end
 
     def start_date

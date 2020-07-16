@@ -203,7 +203,6 @@ class AreWeThereYet
     }
     
     def add_task
-      @task.start_at = Time.now
       new_task = @task.clone
       if new_task.save
         @task.reset
