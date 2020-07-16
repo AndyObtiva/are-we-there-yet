@@ -13,7 +13,7 @@ class AreWeThereYet
     ## Use before_body block to pre-initialize variables to use in body
     #
     #
-    before_body {
+    before_body {    
     }
     
     ## Use after_body block to setup observers for widgets in body
@@ -27,11 +27,7 @@ class AreWeThereYet
     body {
       table {
         # TODO Make resizing table columns auto-resize form fields        
-        table_column {
-          text 'Task'
-          width CONFIG[:table_column_width_hint]
-        }
-        table_column {
+        @project_name_table_column = table_column {
           text 'Project'
           width CONFIG[:table_column_width_hint]
         }
@@ -40,7 +36,15 @@ class AreWeThereYet
           width CONFIG[:table_column_width_hint]
         }
         table_column {
+          text 'Task'
+          width CONFIG[:table_column_width_hint]
+        }
+        table_column {
           text 'Start Date'
+          width CONFIG[:table_column_width_hint]
+        }
+        table_column {
+          text 'End Date'
           width CONFIG[:table_column_width_hint]
         }
         table_column {
@@ -49,15 +53,11 @@ class AreWeThereYet
           sort_property :duration_in_hours
         }
         table_column {
-          text 'End Date'
-          width CONFIG[:table_column_width_hint]
-        }
-        table_column {
           text 'Priority'
           width CONFIG[:table_column_width_hint]
           sort_by {|value| ['High', 'Medium', 'Low'].index(value) }
         }
-        items bind(Task, :list), column_properties(:name, :project_name, :task_type, :start_date, :duration, :end_date, :priority)
+        items bind(Task, :list), column_properties(:project_name, :task_type, :name, :start_date, :end_date, :duration, :priority)
         on_control_resized {
           window_width = body_root.swt_widget.shell.bounds.width
           columns = body_root.swt_widget.columns

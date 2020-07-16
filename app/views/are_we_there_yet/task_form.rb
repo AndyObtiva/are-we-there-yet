@@ -55,32 +55,12 @@ class AreWeThereYet
               horizontal_spacing 0
               #margin_width 0
             }
-            @labels[:name] = label {
-              layout_data(:fill, :top, true, true)
-              text 'Task'
-            }
-            @inputs[:name] = text { 
-              layout_data(:fill, :top, true, true)
-              focus true             
-              text bind(@task, :name)
-              on_key_pressed { |event|
-                @inputs[:project_name].swt_widget.set_focus if event.keyCode == swt(:cr)
-              }
-            }
-          }
-          composite {
-            layout_data(:fill, :fill, true, true) {
-              width_hint CONFIG[:table_column_width_hint] - 5
-            }
-            grid_layout(1, true) {
-              horizontal_spacing 0
-              #margin_width 0
-            }
             @labels[:project_name] = label {
               layout_data(:fill, :top, true, true)
               text 'Project'
             }
             @inputs[:project_name] = combo {              
+              focus true             
               layout_data(:fill, :top, true, true)
               selection bind(@task, :project_name)
               on_key_pressed { |event|
@@ -116,6 +96,26 @@ class AreWeThereYet
               horizontal_spacing 0
               #margin_width 0
             }
+            @labels[:name] = label {
+              layout_data(:fill, :top, true, true)
+              text 'Task'
+            }
+            @inputs[:name] = text { 
+              layout_data(:fill, :top, true, true)
+              text bind(@task, :name)
+              on_key_pressed { |event|
+                @inputs[:project_name].swt_widget.set_focus if event.keyCode == swt(:cr)
+              }
+            }
+          }
+          composite {
+            layout_data(:fill, :fill, true, true) {
+              width_hint CONFIG[:table_column_width_hint] - 5
+            }
+            grid_layout(1, true) {
+              horizontal_spacing 0
+              #margin_width 0
+            }
             @labels[:start_at] = label {
               layout_data(:fill, :top, true, true)
               text 'Start Date'
@@ -136,15 +136,15 @@ class AreWeThereYet
               horizontal_spacing 0
               #margin_width 0
             }
-            @labels[:duration] = label {
+            @labels[:end_at] = label {
               layout_data(:fill, :top, true, true)
-              text 'Duration'
+              text 'End Date'
             }
-            @inputs[:duration] = combo(:read_only) {
+            @inputs[:end_at] = c_date_time(CDT::BORDER | CDT::COMPACT | CDT::DROP_DOWN | CDT::DATE_LONG) {
               layout_data(:fill, :top, true, true)
-              selection bind(@task, :duration)
+              selection bind(@task, :end_at)
               on_key_pressed { |event|
-                @inputs[:end_at].swt_widget.set_focus if event.keyCode == swt(:cr)
+                @inputs[:priority].swt_widget.set_focus if event.keyCode == swt(:cr)
               }
             }
           }
@@ -156,15 +156,15 @@ class AreWeThereYet
               horizontal_spacing 0
               #margin_width 0
             }
-            @labels[:end_at] = label {
+            @labels[:duration] = label {
               layout_data(:fill, :top, true, true)
-              text 'End Date'
+              text 'Duration'
             }
-            @inputs[:end_at] = c_date_time(CDT::BORDER | CDT::COMPACT | CDT::DROP_DOWN | CDT::DATE_LONG) {
+            @inputs[:duration] = combo(:read_only) {
               layout_data(:fill, :top, true, true)
-              selection bind(@task, :end_at)
+              selection bind(@task, :duration)
               on_key_pressed { |event|
-                @inputs[:priority].swt_widget.set_focus if event.keyCode == swt(:cr)
+                @inputs[:end_at].swt_widget.set_focus if event.keyCode == swt(:cr)
               }
             }
           }
@@ -206,7 +206,7 @@ class AreWeThereYet
       new_task = @task.clone
       if new_task.save
         @task.reset
-        @inputs[:name].swt_widget.set_focus
+        @inputs[:project_name].swt_widget.set_focus
       else
         @inputs[new_task.errors.keys.first].swt_widget.set_focus
       end

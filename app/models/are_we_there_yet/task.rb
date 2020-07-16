@@ -63,7 +63,7 @@ class AreWeThereYet
       end
                   
       def list
-        @list = all.to_a if @list.to_a.size != count
+        @list = all.order(:project_name, :task_type, :start_at).to_a if @list.to_a.size != count
         FILTERS.each do |filter|
           @list = @list.select do |task|
             value = task.send(filter.to_s.sub('_filter', ''))
@@ -96,10 +96,9 @@ class AreWeThereYet
     end
     
     def reset
+      # intentionally don't reset project name and task type assuming they would used over and over again
       self.id = nil
       self.name = nil
-      self.project_name = nil
-      self.task_type = nil
       self.start_at = nil
       self.duration = nil
       self.end_at = nil
