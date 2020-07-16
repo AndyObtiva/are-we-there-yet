@@ -7,3 +7,4 @@ Add miscellaneous tasks and issues here.
 - Fix form field alignment with table columns
 - Fix window maximization (and resizing) layout issues
 - Add a menu with theme configuration as an option
+- Attempt to add ? to the end of name in Mac app
