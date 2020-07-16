@@ -62,6 +62,7 @@ class AreWeThereYet
       end
       observe(Task, :all, &render_gantt_chart) 
       render_gantt_chart.call(Task.all)
+      @after_body_done = true
     }
 
     ## Add widget content inside custom shell body
@@ -84,18 +85,21 @@ class AreWeThereYet
           @gantt_chart_container = scrolled_composite { |container|
             @gantt_chart = gantt_chart(GanttFlags::H_SCROLL_FIXED_RANGE, @gantt_chart_settings)
           }
-          composite {
+          composite { |composite_proxy|
             task_form {
-              layout_data :fill, :fill, true, true            
+              layout_data(:fill, :fill, true, true) {
+                minimum_height 120
+              }
             }
             filter_form {
-              layout_data :fill, :fill, true, true            
-            }
-            task_table {
-              layout_data :fill, :fill, true, true
+              layout_data(:fill, :fill, true, true) {
+                minimum_height 120
+              }
             }
           }
-          weights [2, 3]
+          @task_table = task_table {
+            layout_data :fill, :fill, true, true
+          }
         }
       }
     }
