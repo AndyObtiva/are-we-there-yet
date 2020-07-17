@@ -123,6 +123,10 @@ class AreWeThereYet
       Task.priority_filter_options
     end
     
+    def priority_sort
+      ['High', 'Medium', 'Low'].index(priority)    
+    end
+    
     def start_at=(value)
       unless value.nil?
         value = Time.at(value.to_java.time / 1000.0)

@@ -55,8 +55,9 @@ class AreWeThereYet
         table_column {
           text 'Priority'
           width CONFIG[:table_column_width_hint]
-          sort_by {|value| ['High', 'Medium', 'Low'].index(value) }
+          sort_property :priority_sort
         }
+        additional_sort_properties :project_name, :task_type, :start_date, :duration_in_hours, :name, :priority_sort, :end_date
         items bind(Task, :list), column_properties(:project_name, :task_type, :name, :start_date, :end_date, :duration, :priority)
         on_control_resized {
           window_width = body_root.swt_widget.shell.bounds.width
