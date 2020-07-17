@@ -1,6 +1,9 @@
 class AreWeThereYet
   class Task < ActiveRecord::Base
+    include Glimmer
     include Glimmer::DataBinding::ObservableModel
+    
+    after_initialize :initialize_observers
     after_create :task_list_changed
     after_destroy :task_list_changed
     
@@ -63,7 +66,7 @@ class AreWeThereYet
       end
                   
       def list
-        @list = all.order(:project_name, :task_type, :start_at).to_a if @list.to_a.size != count
+        @list = all.to_a if @list.to_a.size != count
         FILTERS.each do |filter|
           @list = @list.select do |task|
             value = task.send(filter.to_s.sub('_filter', ''))
@@ -88,6 +91,14 @@ class AreWeThereYet
         Glimmer::DataBinding::Observer.proc do |new_value|
           Task.task_list_changed
         end.observe(Task, filter)
+      end
+    end
+    
+    def initialize_observers
+      [:project_name, :task_type, :name, :start_date, :end_date, :duration, :priority].each do |property|
+        observe(self, property) do |new_value|
+          save!
+        end
       end
     end
     

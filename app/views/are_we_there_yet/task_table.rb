@@ -60,6 +60,7 @@ class AreWeThereYet
         additional_sort_properties :project_name, :task_type, :start_date, :duration_in_hours, :name, :priority_sort, :end_date
         items bind(Task, :list), column_properties(:project_name, :task_type, :name, :start_date, :end_date, :duration, :priority)
         table_proxy.sort_by_column @project_name_table_column
+        
         on_control_resized {
           window_width = body_root.swt_widget.shell.bounds.width
           columns = body_root.swt_widget.columns
@@ -67,6 +68,10 @@ class AreWeThereYet
           columns.each do |column|
             column.width = new_column_width
           end
+        }
+        
+        on_mouse_up { |event|
+          table_proxy.edit_table_item(event.table_item, event.column_index)
         }
         
         menu {
