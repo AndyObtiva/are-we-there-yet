@@ -25,7 +25,7 @@ class AreWeThereYet
     ## Top-most widget must be a shell or another custom shell
     #
     body {
-      table {
+      table { |table_proxy|
         # TODO Make resizing table columns auto-resize form fields        
         @project_name_table_column = table_column {
           text 'Project'
@@ -59,6 +59,7 @@ class AreWeThereYet
         }
         additional_sort_properties :project_name, :task_type, :start_date, :duration_in_hours, :name, :priority_sort, :end_date
         items bind(Task, :list), column_properties(:project_name, :task_type, :name, :start_date, :end_date, :duration, :priority)
+        table_proxy.sort_by_column @project_name_table_column
         on_control_resized {
           window_width = body_root.swt_widget.shell.bounds.width
           columns = body_root.swt_widget.columns
