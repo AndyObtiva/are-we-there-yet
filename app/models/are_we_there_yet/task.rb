@@ -143,6 +143,7 @@ class AreWeThereYet
         value = Time.at(value.to_java.time / 1000.0)
       end
       super(value)
+      notify_observers(:start_date)
       notify_observers(:end_at)
     end
     
@@ -151,6 +152,10 @@ class AreWeThereYet
       Time.at(super.to_time.localtime.to_java.time / 1000.0).localtime
     end
 
+    def start_date=(value)
+      self.start_at = value.is_a?(String) ? DateTime.strptime("#{value} #{Time.now.zone}", '%Y-%m-%d %z') : value
+    end
+    
     def start_date
       start_at&.strftime('%Y-%m-%d')
     end
@@ -165,6 +170,7 @@ class AreWeThereYet
         calculated_duration_time = value - start_at
         self.duration_time = calculated_duration_time
       end
+      notify_observers(:end_date)      
     end
     
     def end_at
