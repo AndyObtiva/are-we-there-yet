@@ -84,7 +84,7 @@ class AreWeThereYet
               layout_data(:fill, :top, true, true)
               selection bind(@task, :task_type)
               on_key_pressed { |event|
-                @inputs[:start_at].swt_widget.set_focus if event.keyCode == swt(:cr)
+                @inputs[:name].swt_widget.set_focus if event.keyCode == swt(:cr)
               }
             }
           }
@@ -104,7 +104,7 @@ class AreWeThereYet
               layout_data(:fill, :top, true, true)
               text bind(@task, :name)
               on_key_pressed { |event|
-                @inputs[:project_name].swt_widget.set_focus if event.keyCode == swt(:cr)
+                @inputs[:start_at].swt_widget.set_focus if event.keyCode == swt(:cr)
               }
             }
           }
@@ -124,7 +124,7 @@ class AreWeThereYet
               layout_data(:fill, :top, true, true)
               selection bind(@task, :start_at)
               on_key_pressed { |event|
-                @inputs[:duration].swt_widget.set_focus if event.keyCode == swt(:cr)
+                @inputs[:end_at].swt_widget.set_focus if event.keyCode == swt(:cr)
               }
             }
           }
@@ -144,7 +144,7 @@ class AreWeThereYet
               layout_data(:fill, :top, true, true)
               selection bind(@task, :end_at)
               on_key_pressed { |event|
-                @inputs[:priority].swt_widget.set_focus if event.keyCode == swt(:cr)
+                @inputs[:duration].swt_widget.set_focus if event.keyCode == swt(:cr)
               }
             }
           }
@@ -164,7 +164,7 @@ class AreWeThereYet
               layout_data(:fill, :top, true, true)
               selection bind(@task, :duration)
               on_key_pressed { |event|
-                @inputs[:end_at].swt_widget.set_focus if event.keyCode == swt(:cr)
+                @inputs[:priority].swt_widget.set_focus if event.keyCode == swt(:cr)
               }
             }
           }

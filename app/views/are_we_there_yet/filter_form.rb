@@ -54,26 +54,6 @@ class AreWeThereYet
               horizontal_spacing 0
               #margin_width 0
             }
-            @labels[:name_filter] = label {
-              layout_data(:fill, :top, true, true)
-              text 'Task'
-            }
-            @inputs[:name_filter] = text { 
-              layout_data(:fill, :top, true, true)
-              text bind(Task, :name_filter)
-              on_key_pressed { |event|
-                @inputs[:project_name_filter].swt_widget.set_focus if event.keyCode == swt(:cr)
-              }
-            }
-          }
-          composite {
-            layout_data(:fill, :fill, true, true) {
-              width_hint CONFIG[:table_column_width_hint] - 5
-            }
-            grid_layout(1, true) {
-              horizontal_spacing 0
-              #margin_width 0
-            }
             @labels[:project_name_filter] = label {
               layout_data(:fill, :top, true, true)
               text 'Project'
@@ -102,6 +82,26 @@ class AreWeThereYet
               layout_data(:fill, :top, true, true)
               selection bind(Task, :task_type_filter)
               on_key_pressed { |event|
+                @inputs[:name_filter].swt_widget.set_focus if event.keyCode == swt(:cr)
+              }
+            }
+          }
+          composite {
+            layout_data(:fill, :fill, true, true) {
+              width_hint CONFIG[:table_column_width_hint] - 5
+            }
+            grid_layout(1, true) {
+              horizontal_spacing 0
+              #margin_width 0
+            }
+            @labels[:name_filter] = label {
+              layout_data(:fill, :top, true, true)
+              text 'Task'
+            }
+            @inputs[:name_filter] = text { 
+              layout_data(:fill, :top, true, true)
+              text bind(Task, :name_filter)
+              on_key_pressed { |event|
                 @inputs[:start_at_filter].swt_widget.set_focus if event.keyCode == swt(:cr)
               }
             }
@@ -121,26 +121,6 @@ class AreWeThereYet
             @inputs[:start_at_filter] = c_date_time(CDT::BORDER | CDT::COMPACT | CDT::DROP_DOWN | CDT::DATE_LONG) {
               layout_data(:fill, :top, true, true)
               selection bind(Task, :start_at_filter)
-              on_key_pressed { |event|
-                @inputs[:duration_filter].swt_widget.set_focus if event.keyCode == swt(:cr)
-              }
-            }
-          }
-          composite {
-            layout_data(:fill, :fill, true, true) {
-              width_hint CONFIG[:table_column_width_hint] - 5
-            }
-            grid_layout(1, true) {
-              horizontal_spacing 0
-              #margin_width 0
-            }
-            @labels[:duration_filter] = label {
-              layout_data(:fill, :top, true, true)
-              text 'Duration'
-            }
-            @inputs[:duration_filter] = combo(:read_only) {
-              layout_data(:fill, :top, true, true)
-              selection bind(Task, :duration_filter)
               on_key_pressed { |event|
                 @inputs[:end_at_filter].swt_widget.set_focus if event.keyCode == swt(:cr)
               }
@@ -162,10 +142,30 @@ class AreWeThereYet
               layout_data(:fill, :top, true, true)
               selection bind(Task, :end_at_filter)
               on_key_pressed { |event|
-                @inputs[:priority_filter].swt_widget.set_focus if event.keyCode == swt(:cr)
+                @inputs[:duration_filter].swt_widget.set_focus if event.keyCode == swt(:cr)
               }
             }
           }
+          composite {
+            layout_data(:fill, :fill, true, true) {
+              width_hint CONFIG[:table_column_width_hint] - 5
+            }
+            grid_layout(1, true) {
+              horizontal_spacing 0
+              #margin_width 0
+            }
+            @labels[:duration_filter] = label {
+              layout_data(:fill, :top, true, true)
+              text 'Duration'
+            }
+            @inputs[:duration_filter] = combo(:read_only) {
+              layout_data(:fill, :top, true, true)
+              selection bind(Task, :duration_filter)
+              on_key_pressed { |event|
+                @inputs[:priority_filter].swt_widget.set_focus if event.keyCode == swt(:cr)
+              }
+            }
+          }          
           composite {
             layout_data(:fill, :fill, true, true) {
               width_hint CONFIG[:table_column_width_hint] - 5
