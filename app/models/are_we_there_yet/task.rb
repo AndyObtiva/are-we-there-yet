@@ -5,6 +5,7 @@ class AreWeThereYet
     
     after_initialize :initialize_observers
     after_create :task_list_changed
+    after_update :task_list_changed
     after_destroy :task_list_changed
     
     validates :name, presence: true
@@ -24,7 +25,13 @@ class AreWeThereYet
       include Glimmer::DataBinding::ObservableModel      
       attr_accessor *FILTERS
       
+      def prototype
+        @prototype ||= new
+      end
+      
       def task_list_changed
+        prototype.notify_observers(:project_name_options)
+        prototype.notify_observers(:task_type_options)
         notify_observers(:all)
         notify_observers(:list)
       end
@@ -97,12 +104,16 @@ class AreWeThereYet
     def initialize_observers
       [:project_name, :task_type, :name, :start_date, :end_date, :duration, :priority].each do |property|
         observe(self, property) do |new_value|
-          save! if persisted?
+          if persisted?
+            save!
+          end
         end
       end
     end
     
     def task_list_changed
+      notify_observers(:project_name_options)
+      notify_observers(:task_type_options)
       Task.task_list_changed
     end
     
@@ -114,8 +125,6 @@ class AreWeThereYet
       self.duration = nil
       self.end_at = nil
       self.priority = nil
-      notify_observers(:project_name_options)
-      notify_observers(:task_type_options)
     end
     
     def project_name_options

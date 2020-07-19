@@ -16,7 +16,7 @@ class AreWeThereYet
     #
     #
     before_body {
-      @task = AreWeThereYet::Task.new
+      @task = AreWeThereYet::Task.prototype
       @labels = {}
       @inputs = {}
     }
