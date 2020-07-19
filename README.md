@@ -23,7 +23,7 @@ Windows Screenshot:
 
 Development may be tracked in [GitHub Projects](https://github.com/AndyObtiva/are-we-there-yet/projects/1).
 
-Upcoming Releases:
+Planned Releases:
 - [v0.5.0 (Alpha)](https://github.com/AndyObtiva/are-we-there-yet/projects/1?card_filter_query=milestone%3A%22v0.5.0+%28Alpha%29%22) on 2020-07-12 ([Download Here](https://www.dropbox.com/s/g8m3dg5xrcpfzs6/Are%20We%20There%20Yet-0.5.0.dmg?dl=1))
 - [v0.6.0 (Alpha)](https://github.com/AndyObtiva/are-we-there-yet/projects/1?card_filter_query=milestone%3A%22v0.6.0+%28Alpha%29%22) on 2020-07-13 ([Download Here](https://www.dropbox.com/s/8wl8fhtz5sma3jk/Are%20We%20There%20Yet-0.6.0.dmg?dl=1))
 - [v0.7.0 (Alpha)](https://github.com/AndyObtiva/are-we-there-yet/projects/1?card_filter_query=milestone%3A%22v0.7.0+%28Alpha%29%22) on 2020-07-15 ([Download Here](https://www.dropbox.com/s/a8pl4a7c6d8prkq/Are%20We%20There%20Yet-0.7.0.dmg?dl=1))
