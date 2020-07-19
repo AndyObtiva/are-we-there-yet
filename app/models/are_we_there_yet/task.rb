@@ -97,7 +97,7 @@ class AreWeThereYet
     def initialize_observers
       [:project_name, :task_type, :name, :start_date, :end_date, :duration, :priority].each do |property|
         observe(self, property) do |new_value|
-          save!
+          save! if persisted?
         end
       end
     end
