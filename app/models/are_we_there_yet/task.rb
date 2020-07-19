@@ -68,7 +68,7 @@ class AreWeThereYet
       def list
         @list = all.to_a if @list.to_a.size != count
         FILTERS.each do |filter|
-          @list = @list.select do |task|
+          @list = @list.to_a.select do |task|
             value = task.send(filter.to_s.sub('_filter', ''))
             filter_value = Task.send(filter)
             TYPE_FILTERS[value.class].call(value, filter_value)

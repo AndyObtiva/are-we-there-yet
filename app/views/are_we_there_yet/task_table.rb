@@ -80,11 +80,34 @@ class AreWeThereYet
           table_proxy.edit_table_item(event.table_item, event.column_index)
         }
         
+        on_menu_detected { |event|
+          column_x = event.x - event.widget.shell.bounds.x
+          column_y = 0
+          @column_index = nil
+          # TODO offload this to a method on TableProxy
+          @sort_by_menu_item.swt_widget.text = 'Sort'
+          @remove_task_menu_item.swt_widget.text = 'Remove Task'
+          if !event.widget.items.empty?
+            @remove_task_menu_item.swt_widget.text = 'Remove Tasks' if swt_widget.selection.size > 1
+            table_item = event.widget.items.first
+            @column_index = event.widget.column_count.times.to_a.detect do |ci|
+              table_item.getBounds(ci).contains(column_x, column_y)
+            end
+            @sort_by_menu_item.swt_widget.text = "Sort by #{swt_widget.columns[@column_index].text}" if @column_index
+          end
+        }
+        
         menu {
-          menu_item {
+          @remove_task_menu_item = menu_item {
             text "Remove Task"
             on_widget_selected {
               swt_widget.selection.map(&:data).each(&:destroy)
+            }
+          }
+          @sort_by_menu_item = menu_item {            
+            text 'Sort'
+            on_widget_selected { |event|
+              body_root.sort_by_column(body_root.table_column_proxies[@column_index]) if @column_index
             }
           }
         }
