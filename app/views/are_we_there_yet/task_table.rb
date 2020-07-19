@@ -25,7 +25,7 @@ class AreWeThereYet
     ## Top-most widget must be a shell or another custom shell
     #
     body {
-      table { |table_proxy|
+      table(:multi) { |table_proxy|
         # TODO Make resizing table columns auto-resize form fields        
         @project_name_table_column = table_column {
           text 'Project'
@@ -84,7 +84,7 @@ class AreWeThereYet
           menu_item {
             text "Remove Task"
             on_widget_selected {
-              swt_widget.selection.first.data.destroy
+              swt_widget.selection.map(&:data).each(&:destroy)
             }
           }
         }
