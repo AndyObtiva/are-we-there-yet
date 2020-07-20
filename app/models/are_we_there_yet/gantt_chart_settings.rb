@@ -45,7 +45,7 @@ class AreWeThereYet
       self.allowHeaderSelection = false
       self.drawFullPercentageBar = false
       self.drawSelectionMarkerAroundSelectedEvent = false
-      self.enableDragAndDrop = false
+      self.enableDragAndDrop = true
       self.enableResizing = true
       self.enableZooming = false
       self.showDateTips = true

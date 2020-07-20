@@ -44,17 +44,8 @@ class AreWeThereYet
         @gantt_chart.swt_widget.dispose
         @gantt_chart_container.content {
           @gantt_chart = gantt_chart(GanttFlags::H_SCROLL_INFINITE, @gantt_chart_settings) {
-            on_events_resize_finished { |events, mouse_event|
-              gantt_event = events.first
-              task = gantt_event.data
-              original_start_at = task.start_at
-              original_end_at = task.end_at
-              task.start_at = Time.at(gantt_event.revised_start.time_in_millis / 1000.0) if gantt_event.revised_start
-              task.end_at = Time.at(gantt_event.revised_end.time_in_millis / 1000.0) if gantt_event.revised_end
-              if gantt_event.revised_end.nil?
-                task.duration_time = original_end_at - task.start_at
-              end
-            }
+            on_events_moved(&method(:handle_event_change))
+            on_events_resize_finished(&method(:handle_event_change))
           }
         }
         @gantt_chart_container.swt_widget.set_content @gantt_chart.swt_widget
@@ -127,6 +118,36 @@ class AreWeThereYet
     
     def display_preferences_dialog        
       preferences_dialog(parent_shell_proxy: body_root).open
+    end
+    
+    def handle_event_change(events, mouse_event)
+      handler = lambda do
+        gantt_event = events.first
+        task = gantt_event.data
+        original_start_at = task.start_at
+        original_end_at = task.end_at
+        task.start_at = Time.at(gantt_event.revised_start.time_in_millis / 1000.0) if gantt_event.revised_start
+        task.end_at = Time.at(gantt_event.revised_end.time_in_millis / 1000.0) if gantt_event.revised_end
+        if gantt_event.revised_end.nil?
+          task.duration_time = original_end_at - task.start_at
+        end    
+      end
+      
+      handler_count = @handler_count = @handler_count.to_i + 1
+      if mouse_event.count == 0
+        Thread.new {
+          sleep(0.50)
+          async_exec {
+            if @handler_count == handler_count
+              handler.call
+              @handler_count = nil
+            end
+          }
+        }
+      else
+        handler.call
+        @handler_count = nil
+      end
     end
     
     def to_gantt_event(task)
