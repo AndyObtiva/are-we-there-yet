@@ -15,6 +15,7 @@ class AreWeThereYet
       'enableDragAndDrop', 
       'enableResizing', 
       'enableZooming', 
+      'showDateTips',
       'showDefaultMenuItemsOnEventRightClick', 
       'showDeleteMenuOption', 
       'showMenuItemsOnRightClick', 
@@ -45,8 +46,9 @@ class AreWeThereYet
       self.drawFullPercentageBar = false
       self.drawSelectionMarkerAroundSelectedEvent = false
       self.enableDragAndDrop = false
-      self.enableResizing = false
+      self.enableResizing = true
       self.enableZooming = false
+      self.showDateTips = true
       self.showDefaultMenuItemsOnEventRightClick = false
       self.showDeleteMenuOption = false
       self.showMenuItemsOnRightClick = false

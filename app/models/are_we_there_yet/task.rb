@@ -15,11 +15,9 @@ class AreWeThereYet
     validates :duration, presence: true
     validates :priority, presence: true
     
-    FILTERS = [:name_filter, :project_name_filter, :task_type_filter, :start_at_filter, :duration_filter, :end_at_filter, :priority_filter]
-    TYPE_FILTERS = {
-      String => lambda { |value, filter_value| value.to_s.downcase.include?(filter_value.to_s.downcase) },
-      Time => lambda { |value, filter_value| filter_value.nil? || value&.strftime('%Y-%m-%d') == filter_value.strftime('%Y-%m-%d') },
-    }
+    TEXTUAL_FILTERS = [:name_filter, :project_name_filter, :task_type_filter, :duration_filter, :priority_filter]
+    TIME_FILTERS = [:start_at_filter, :end_at_filter]
+    FILTERS = TEXTUAL_FILTERS + TIME_FILTERS
     
     class << self
       include Glimmer::DataBinding::ObservableModel      
@@ -73,14 +71,27 @@ class AreWeThereYet
       end
                   
       def list
-        @list = all.to_a if @list.to_a.size != count
-        FILTERS.each do |filter|
-          @list = @list.to_a.select do |task|
+        @list = all.to_a
+        TEXTUAL_FILTERS.each do |filter|
+          @list = @list.select do |task|
             value = task.send(filter.to_s.sub('_filter', ''))
             filter_value = Task.send(filter)
-            TYPE_FILTERS[value.class].call(value, filter_value)
+            value.to_s.downcase.include?(filter_value.to_s.downcase)
           end
         end
+        
+        @list = @list.select do |task|        
+          value = task.start_at
+          filter_value = Task.start_at_filter
+          filter_value.nil? ? true : value >= filter_value
+        end
+        
+        @list = @list.select do |task|
+          value = task.end_at
+          filter_value = Task.end_at_filter
+          filter_value.nil? ? true : value <= filter_value
+        end
+        
         @list
       end
       
@@ -148,7 +159,7 @@ class AreWeThereYet
     end
     
     def start_at=(value)
-      unless value.nil?
+      unless value.nil? || value.is_a?(Time)
         value = Time.at(value.to_java.time / 1000.0)
       end
       super(value)
@@ -171,7 +182,7 @@ class AreWeThereYet
     
     def end_at=(value)
       return if value.nil?
-      value = Time.at(value.to_java.time / 1000.0)
+      value = Time.at(value.to_java.time / 1000.0) unless value.is_a?(Time)
       if start_at.nil? || value < start_at
         calculated_start_at = value - duration_time
         self.start_at = calculated_start_at

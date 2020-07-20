@@ -43,7 +43,19 @@ class AreWeThereYet
       render_gantt_chart = lambda do |new_tasks|
         @gantt_chart.swt_widget.dispose
         @gantt_chart_container.content {
-          @gantt_chart = gantt_chart(GanttFlags::H_SCROLL_INFINITE, @gantt_chart_settings)
+          @gantt_chart = gantt_chart(GanttFlags::H_SCROLL_INFINITE, @gantt_chart_settings) {
+            on_events_resize_finished { |events, mouse_event|
+              gantt_event = events.first
+              task = gantt_event.data
+              original_start_at = task.start_at
+              original_end_at = task.end_at
+              task.start_at = Time.at(gantt_event.revised_start.time_in_millis / 1000.0) if gantt_event.revised_start
+              task.end_at = Time.at(gantt_event.revised_end.time_in_millis / 1000.0) if gantt_event.revised_end
+              if gantt_event.revised_end.nil?
+                task.duration_time = original_end_at - task.start_at
+              end
+            }
+          }
         }
         @gantt_chart_container.swt_widget.set_content @gantt_chart.swt_widget
         @last_gantt_event = {}
@@ -119,10 +131,11 @@ class AreWeThereYet
     
     def to_gantt_event(task)
       start_date_time = Calendar.getInstance # TODO move to Task class
-      start_date_time.set(task.start_at.year, task.start_at.month, task.start_at.day, task.start_at.hour, task.start_at.min, task.start_at.sec)
+      start_date_time.set(task.start_at.year, task.start_at.month - 1, task.start_at.day, task.start_at.hour, task.start_at.min, task.start_at.sec)
       end_date_time = Calendar.getInstance # TODO move to Task class
-      end_date_time.set(task.end_at.year, task.end_at.month, task.end_at.day, task.end_at.hour, task.end_at.min, task.end_at.sec)         
+      end_date_time.set(task.end_at.year, task.end_at.month - 1, task.end_at.day, task.end_at.hour, task.end_at.min, task.end_at.sec)         
       gantt_event = GanttEvent.new(@gantt_chart.swt_widget, task.name, start_date_time, end_date_time, task.finished? ? 100 : 0) # TODO support percent complete
+      gantt_event.data = task
       gantt_event
     end
     
