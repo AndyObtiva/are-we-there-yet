@@ -29,6 +29,10 @@ class AreWeThereYet
       configure_app_initial_settings
     end
     
+    def getTextDisplayFormat
+      "#name# (#days#d)"
+    end
+    
     def configure_app_initial_settings
       self.drawVerticalLines = false
       self.allowBlankAreaDragAndDropToMoveDates = false
