@@ -33,6 +33,10 @@ class AreWeThereYet
       "#name# (#days#d)"
     end
     
+    def getDefaultAdvancedTooltipText
+      "\\cePlanned: #sd# - #ed# (#days# day(s))\n\\c100100100"
+    end
+    
     def configure_app_initial_settings
       self.drawVerticalLines = false
       self.allowBlankAreaDragAndDropToMoveDates = false

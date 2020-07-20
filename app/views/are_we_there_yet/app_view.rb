@@ -43,7 +43,7 @@ class AreWeThereYet
       render_gantt_chart = lambda do |new_tasks|
         @gantt_chart.swt_widget.dispose
         @gantt_chart_container.content {
-          @gantt_chart = gantt_chart(GanttFlags::H_SCROLL_FIXED_RANGE, @gantt_chart_settings)
+          @gantt_chart = gantt_chart(GanttFlags::H_SCROLL_INFINITE, @gantt_chart_settings)
         }
         @gantt_chart_container.swt_widget.set_content @gantt_chart.swt_widget
         @last_gantt_event = {}
@@ -83,7 +83,7 @@ class AreWeThereYet
           layout_data(:fill, :fill, true, true)
           sash_width 10          
           @gantt_chart_container = scrolled_composite { |container|
-            @gantt_chart = gantt_chart(GanttFlags::H_SCROLL_FIXED_RANGE, @gantt_chart_settings)
+            @gantt_chart = gantt_chart(GanttFlags::H_SCROLL_INFINITE, @gantt_chart_settings)
           }
           composite { |composite_proxy|
             task_form {
