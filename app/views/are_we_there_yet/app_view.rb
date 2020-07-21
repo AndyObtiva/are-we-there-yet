@@ -63,8 +63,8 @@ class AreWeThereYet
           end
         end
       end
-      observe(Task, :all, &render_gantt_chart) 
-      render_gantt_chart.call(Task.all)
+      observe(Task, :chart, &render_gantt_chart) 
+      render_gantt_chart.call(Task.chart)
       @after_body_done = true
     }
 

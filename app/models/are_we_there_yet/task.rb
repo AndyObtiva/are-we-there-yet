@@ -30,7 +30,7 @@ class AreWeThereYet
       def task_list_changed
         prototype.notify_observers(:project_name_options)
         prototype.notify_observers(:task_type_options)
-        notify_observers(:all)
+        notify_observers(:chart)
         notify_observers(:list)
       end
       
@@ -70,6 +70,7 @@ class AreWeThereYet
         ['', 'High', 'Medium', 'Low']
       end
                   
+      # tasks to use for table list
       def list
         @list = all.to_a
         TEXTUAL_FILTERS.each do |filter|
@@ -97,6 +98,15 @@ class AreWeThereYet
       
       def list=(new_list)
         @list = new_list
+      end
+      
+      # tasks to use for chart
+      def chart
+        @chart = order(:start_at)
+      end
+      
+      def chart=(new_chart)
+        @chart = new_chart
       end
       
       def reset_filters
