@@ -32,12 +32,12 @@ Planned Releases:
 
 ### License
 
-[MIT License](LICENSE.txt)
+[MIT](LICENSE.txt)
 
 Copyright (c) 2020 - Are We There Yet? by [Andy Maleh](https://github.com/AndyObtiva)
 
 --
 
-Built with [Glimmer](https://github.com/AndyObtiva/glimmer) (Ruby Desktop Development GUI Library).
+[<img src="https://raw.githubusercontent.com/AndyObtiva/glimmer/master/images/glimmer-logo-hi-res.png" height=40 />](https://github.com/AndyObtiva/glimmer) Built with [Glimmer](https://github.com/AndyObtiva/glimmer) (Ruby Desktop Development GUI Library)
 
 Are We There Yet? logo was made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
