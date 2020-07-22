@@ -28,7 +28,7 @@ Planned Releases:
 - [v0.6.0 (Alpha)](https://github.com/AndyObtiva/are-we-there-yet/projects/1?card_filter_query=milestone%3A%22v0.6.0+%28Alpha%29%22) on 2020-07-13 ([Download Here](https://www.dropbox.com/s/8wl8fhtz5sma3jk/Are%20We%20There%20Yet-0.6.0.dmg?dl=1))
 - [v0.7.0 (Alpha)](https://github.com/AndyObtiva/are-we-there-yet/projects/1?card_filter_query=milestone%3A%22v0.7.0+%28Alpha%29%22) on 2020-07-15 ([Download Here](https://www.dropbox.com/s/a8pl4a7c6d8prkq/Are%20We%20There%20Yet-0.7.0.dmg?dl=1))
 - [v1.0.0 (MVP)](https://github.com/AndyObtiva/are-we-there-yet/projects/1?card_filter_query=milestone%3A%22v1.0.0+%28MVP%29%22) on 2020-07-19 ([Download Here](https://www.dropbox.com/s/p6txqnpwc3trh8f/Are%20We%20There%20Yet-1.0.0.dmg?dl=1))
-- [v1.1.0 (Windows)](https://github.com/AndyObtiva/are-we-there-yet/projects/1?card_filter_query=milestone%3A%22v1.1.0+%28Windows%29%22) on 2020-07-31 ([Download Here](https://www.dropbox.com/s/3zyiq8g3i6335ik/Are%20We%20There%20Yet-1.0.0.msi?dl=1))
+- [v1.1.0 (Windows)](https://github.com/AndyObtiva/are-we-there-yet/projects/1?card_filter_query=milestone%3A%22v1.1.0+%28Windows%29%22) on 2020-07-31 ([Interim Progress Download Here](https://www.dropbox.com/s/phdpmr4bti43xq0/Are%20We%20There%20Yet-1.1.0.msi?dl=1))
 
 ### License
 
