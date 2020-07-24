@@ -11,8 +11,6 @@ Windows Screenshot:
 
 [<img src="https://raw.githubusercontent.com/AndyObtiva/are-we-there-yet/master/are-we-there-yet-logo.svg" height=40 /> Download Are We There Yet? v1.0.0](https://www.dropbox.com/s/p6txqnpwc3trh8f/Are%20We%20There%20Yet-1.0.0.dmg?dl=1)
 
-**Note**: this project is still work in progress. 
-
 ### Initial Plan
 
 “Plans are nothing; planning is everything” - Former US President Dwight D Eisenhower
