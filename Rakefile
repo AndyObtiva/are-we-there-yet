@@ -4,8 +4,7 @@ require 'glimmer/rake_task'
 ## arguments for `glimmer package` command.
 #
 Glimmer::Package.javapackager_extra_args =
-  " -native #{ENV['NATIVE'] || ('dmg' if OS.mac?) || ('msi' if OS.windows?)}" +
-  " -Bwin.menuGroup='Are We There Yet'" 
+  " -native #{ENV['NATIVE'] || ('dmg' if OS.mac?) || ('msi' if OS.windows?)}"
 #   " -BlicenseType=" +
 #   " -Bmac.CFBundleIdentifier=" +
 #   " -Bmac.category=" +
