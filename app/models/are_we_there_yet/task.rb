@@ -142,7 +142,9 @@ class AreWeThereYet
       [:project_name, :task_type, :name, :start_date, :end_date, :duration, :priority].each do |property|
         observe(self, property) do |new_value|
           if persisted?
-            save!
+            unless save
+              send("#{property}=", send("#{property}_was"))
+            end
           end
         end
       end
