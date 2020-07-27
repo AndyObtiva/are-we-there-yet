@@ -30,9 +30,14 @@ class AreWeThereYet
       
       def task_list_changed
         @list = nil
-        prototype.notify_observers(:project_name_options)
-        prototype.notify_observers(:task_type_options)
+        prototype.notify_observers(:project_name_filter_options)
+        prototype.notify_observers(:task_type_filter_options)
         notify_observers(:chart)
+        notify_observers(:list)
+      end
+      
+      def task_list_filtered
+        @list = nil
         notify_observers(:list)
       end
       
@@ -127,13 +132,12 @@ class AreWeThereYet
         FILTERS.each do |filter|
           send("#{filter}=", nil)
         end
-        @list = nil
-        notify_observers(:list)
+        task_list_filtered
       end
       
       FILTERS.each do |filter|
         Glimmer::DataBinding::Observer.proc do |new_value|
-          Task.task_list_changed if new_value
+          Task.task_list_filtered if new_value
         end.observe(Task, filter)
       end
     end
