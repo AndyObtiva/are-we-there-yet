@@ -75,8 +75,11 @@ class AreWeThereYet
     body {
       shell {
         # Replace example content below with custom shell content
-        minimum_size @display.monitors.first.bounds.width, @display.monitors.first.bounds.height
+        minimum_size 750, 550
         text "Are We There Yet?"
+        on_swt_show {
+          swt_widget.set_bounds 0, 0, @display.monitors.first.bounds.width, @display.monitors.first.bounds.height
+        }
         grid_layout {
           margin_width 5
           margin_height 5
