@@ -75,7 +75,7 @@ class AreWeThereYet
     body {
       shell {
         # Replace example content below with custom shell content
-        minimum_size 750, 550
+        minimum_size @display.monitors.first.bounds.width, @display.monitors.first.bounds.height
         text "Are We There Yet?"
         grid_layout {
           margin_width 5
@@ -104,6 +104,7 @@ class AreWeThereYet
           @task_table = task_table {
             layout_data :fill, :fill, true, true
           }
+          weights [13, 8, 11]
         }
       }
     }
