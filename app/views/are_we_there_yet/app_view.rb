@@ -35,11 +35,12 @@ class AreWeThereYet
         }
       }
       @gantt_chart_settings = GanttChartSettings.new
+      @mutex = Mutex.new
     }
     
     ## Use after_body block to setup observers for widgets in body
     #
-    after_body {
+    after_body {      
       render_gantt_chart = lambda do |new_tasks|
         @gantt_chart.swt_widget.dispose
         @gantt_chart_container.content {
@@ -63,7 +64,7 @@ class AreWeThereYet
           end
         end
       end
-      observe(Task, :chart, &render_gantt_chart) 
+      observe(Task, :chart, &render_gantt_chart)
       render_gantt_chart.call(Task.chart)
       @after_body_done = true
     }
@@ -122,15 +123,18 @@ class AreWeThereYet
     
     def handle_event_change(events, mouse_event)
       handler = lambda do
-        gantt_event = events.first
-        task = gantt_event.data
-        original_start_at = task.start_at
-        original_end_at = task.end_at
-        task.start_at = Time.at(gantt_event.revised_start.time_in_millis / 1000.0) if gantt_event.revised_start
-        task.end_at = Time.at(gantt_event.revised_end.time_in_millis / 1000.0) if gantt_event.revised_end
-        if gantt_event.revised_end.nil?
-          task.duration_time = original_end_at - task.start_at
-        end    
+        @mutex.synchronize do
+          @gantt_chart_rendering_pending = true
+          gantt_event = events.first
+          task = gantt_event.data
+          original_start_at = task.start_at
+          original_end_at = task.end_at
+          task.start_at = Time.at(gantt_event.revised_start.time_in_millis / 1000.0) if gantt_event.revised_start
+          task.end_at = Time.at(gantt_event.revised_end.time_in_millis / 1000.0) if gantt_event.revised_end
+          if gantt_event.revised_end.nil?
+            task.duration_time = original_end_at - task.start_at
+          end    
+        end
       end
       
       handler_count = @handler_count = @handler_count.to_i + 1

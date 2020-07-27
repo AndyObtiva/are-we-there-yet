@@ -5,6 +5,7 @@ require 'puts_debuggerer'
 require 'bundler/setup'
 Bundler.require
 
+# Load database content (or create it if it doesn't exist)
 require 'db/db'
 
 require 'vendor/nebula/org.eclipse.nebula.widgets.ganttchart_1.0.0.jar'
@@ -14,7 +15,7 @@ Glimmer::Config.import_swt_packages += [
   'org.eclipse.nebula.widgets.ganttchart.themes',
 ]
 
-Glimmer::Config.logging_devices = [:stdout, :file]
+Glimmer::Config.logging_devices = [:stdout, :file, :syslog]
 # Glimmer::Config.logger.level = 'debug'
 # Glimmer::Config.logging_appender_options = Glimmer::Config.logging_appender_options.merge(async: false, auto_flushing: 1)
 require 'views/are_we_there_yet/app_view'
