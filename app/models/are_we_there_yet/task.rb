@@ -38,14 +38,14 @@ class AreWeThereYet
       
       def start_at_filter=(value)
         unless value.nil?
-          value = Time.at(value.to_java.time / 1000.0) # TODO add to a Ruby extension or refinement (consider contributing to JRuby)
+          value = Time.at(value.time / 1000.0).localtime.to_date.to_time # TODO add to a Ruby extension or refinement (consider contributing to JRuby)
         end
         @start_at_filter = value
       end
 
       def end_at_filter=(value)
         unless value.nil?
-          value = Time.at(value.to_java.time / 1000.0)
+          value = Time.at(value.time / 1000.0).localtime.to_date.to_time
         end
         @end_at_filter = value
       end
@@ -72,28 +72,39 @@ class AreWeThereYet
         ['', 'High', 'Medium', 'Low']
       end
       
+      def property_for_filter(filter)
+        filter.to_s.sub('_filter', '')
+      end
+      
       # tasks to use for table list
       def list
         @list ||= all.to_a
         
         TEXTUAL_FILTERS.each do |filter|
-          @list = @list.select do |task|
-            value = task.send(filter.to_s.sub('_filter', ''))
-            filter_value = Task.send(filter)
-            value.to_s.downcase.include?(filter_value.to_s.downcase)
+          filter_value = send(filter)
+          filter_property = property_for_filter(filter)
+          if !filter_value.to_s.empty?
+            @list = @list.select do |task|
+              value = task.send(filter_property)
+              value.to_s.downcase.include?(filter_value.to_s.downcase)
+            end
           end
         end
         
-        @list = @list.select do |task|        
-          value = task.start_at
-          filter_value = Task.start_at_filter
-          filter_value.nil? ? true : value >= filter_value
+        filter_value = start_at_filter
+        if filter_value
+          @list = @list.select do |task|        
+            value = task.start_at
+            filter_value.nil? ? true : value == filter_value
+          end
         end
         
-        @list = @list.select do |task|
-          value = task.end_at
-          filter_value = Task.end_at_filter
-          filter_value.nil? ? true : value <= filter_value
+        filter_value = end_at_filter
+        if filter_value
+          @list = @list.select do |task|
+            value = task.end_at
+            filter_value.nil? ? true : value == filter_value
+          end
         end
         
         @list
@@ -114,13 +125,15 @@ class AreWeThereYet
       
       def reset_filters
         FILTERS.each do |filter|
-          Task.send("#{filter}=", nil)
+          send("#{filter}=", nil)
         end
+        @list = nil
+        notify_observers(:list)
       end
       
       FILTERS.each do |filter|
         Glimmer::DataBinding::Observer.proc do |new_value|
-          Task.task_list_changed
+          Task.task_list_changed if new_value
         end.observe(Task, filter)
       end
     end

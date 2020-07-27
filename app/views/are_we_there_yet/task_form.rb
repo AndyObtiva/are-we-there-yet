@@ -194,6 +194,9 @@ class AreWeThereYet
         
         button {
           text 'Save Task'
+          layout_data(:left, :top, false, false) {
+            width_hint 105
+          }
           on_widget_selected {
             add_task
           }

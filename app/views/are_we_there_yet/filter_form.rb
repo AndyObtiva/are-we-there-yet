@@ -187,6 +187,9 @@ class AreWeThereYet
 
         button {
           text 'Reset Filters'
+          layout_data(:left, :top, false, false) {
+            width_hint 105
+          }
           on_widget_selected {
             Task.reset_filters
           }
