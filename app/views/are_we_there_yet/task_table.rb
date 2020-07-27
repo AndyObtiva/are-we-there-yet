@@ -25,7 +25,7 @@ class AreWeThereYet
     ## Top-most widget must be a shell or another custom shell
     #
     body {
-      table(:multi) { |table_proxy|
+      table(:multi, :full_selection) { |table_proxy|
         # TODO Make resizing table columns auto-resize form fields        
         @project_name_table_column = table_column {
           text 'Project'
