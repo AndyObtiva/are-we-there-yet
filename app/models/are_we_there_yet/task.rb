@@ -30,8 +30,10 @@ class AreWeThereYet
       
       def task_list_changed
         @list = nil
-        prototype.notify_observers(:project_name_filter_options)
-        prototype.notify_observers(:task_type_filter_options)
+        prototype.notify_observers(:project_name_options)
+        prototype.notify_observers(:task_type_options)
+        notify_observers(:project_name_filter_options)
+        notify_observers(:task_type_filter_options)
         notify_observers(:chart)
         notify_observers(:list)
       end
@@ -155,8 +157,6 @@ class AreWeThereYet
     end
     
     def task_list_changed
-      notify_observers(:project_name_options)
-      notify_observers(:task_type_options)
       Task.task_list_changed
     end
     

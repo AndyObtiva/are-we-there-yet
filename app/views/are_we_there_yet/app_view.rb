@@ -75,7 +75,7 @@ class AreWeThereYet
     body {
       shell {
         # Replace example content below with custom shell content
-        minimum_size 750, 550
+        minimum_size 750, 750
         text "Are We There Yet?"
         on_swt_show {
           swt_widget.set_bounds 0, 0, @display.monitors.first.bounds.width, @display.monitors.first.bounds.height
