@@ -2,8 +2,8 @@
 
 Add miscellaneous tasks and issues here.
 
+- Fix sorting issue
 - Fix issue with selection/deletion on Windows
-- Fix sorting on Windows
 - Remove task via Gantt Chart GUI
 - Have an archived task tab
 - Fix form field alignment with table columns

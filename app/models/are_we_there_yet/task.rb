@@ -18,6 +18,7 @@ class AreWeThereYet
     TEXTUAL_FILTERS = [:name_filter, :project_name_filter, :task_type_filter, :duration_filter, :priority_filter]
     TIME_FILTERS = [:start_at_filter, :end_at_filter]
     FILTERS = TEXTUAL_FILTERS + TIME_FILTERS
+    TASK_PROPERTIES = [:project_name, :task_type, :name, :start_date, :end_date, :duration, :priority]
     
     class << self
       include Glimmer::DataBinding::ObservableModel      
@@ -28,6 +29,7 @@ class AreWeThereYet
       end
       
       def task_list_changed
+        @list = nil
         prototype.notify_observers(:project_name_options)
         prototype.notify_observers(:task_type_options)
         notify_observers(:chart)
@@ -69,10 +71,11 @@ class AreWeThereYet
       def priority_filter_options
         ['', 'High', 'Medium', 'Low']
       end
-                  
+      
       # tasks to use for table list
       def list
-        @list = all.to_a
+        @list ||= all.to_a
+        
         TEXTUAL_FILTERS.each do |filter|
           @list = @list.select do |task|
             value = task.send(filter.to_s.sub('_filter', ''))

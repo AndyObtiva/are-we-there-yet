@@ -1,4 +1,4 @@
-require 'models/are_we_there_yet/task'
+  require 'models/are_we_there_yet/task'
 
 class AreWeThereYet  
   class TaskTable
