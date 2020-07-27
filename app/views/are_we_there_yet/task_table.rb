@@ -85,7 +85,7 @@ class AreWeThereYet
           column_y = 0
           @column_index = nil
           # TODO offload this to a method on TableProxy
-          @sort_by_menu_item.swt_widget.text = 'Sort'
+          @sort_by_menu_item.swt_widget.text = 'Sort' unless OS.windows?
           @remove_task_menu_item.swt_widget.text = 'Remove Task'
           if !event.widget.items.empty?
             @remove_task_menu_item.swt_widget.text = 'Remove Tasks' if swt_widget.selection.size > 1
@@ -93,7 +93,7 @@ class AreWeThereYet
             @column_index = event.widget.column_count.times.to_a.detect do |ci|
               table_item.getBounds(ci).contains(column_x, column_y)
             end
-            @sort_by_menu_item.swt_widget.text = "Sort by #{swt_widget.columns[@column_index].text}" if @column_index
+            @sort_by_menu_item.swt_widget.text = "Sort by #{swt_widget.columns[@column_index].text}" if @column_index && OS.windows?
           end
         }
         
@@ -104,12 +104,14 @@ class AreWeThereYet
               swt_widget.selection.map(&:data).each(&:destroy)
             }
           }
-          @sort_by_menu_item = menu_item {            
-            text 'Sort'
-            on_widget_selected { |event|
-              body_root.sort_by_column(body_root.table_column_proxies[@column_index]) if @column_index
+          unless OS.windows?
+            @sort_by_menu_item = menu_item {            
+              text 'Sort'
+              on_widget_selected { |event|
+                body_root.sort_by_column(body_root.table_column_proxies[@column_index]) if @column_index
+              }
             }
-          }
+          end
         }
       }    
     }
