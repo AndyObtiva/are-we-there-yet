@@ -8,6 +8,10 @@ For very simple projects, enterprise project management software is too large an
 
 Are We There Yet? aims to be an alternative that provides a quick "at a glance" view of multiple small projects and their progress of completion.
 
+## Customer
+
+Interior Designer
+
 ## Business Use Cases
 
 - Enter tasks belonging to a project
