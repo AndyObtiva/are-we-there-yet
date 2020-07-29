@@ -77,7 +77,7 @@ class AreWeThereYet
         # Replace example content below with custom shell content
         minimum_size 750, 750
         text "Are We There Yet?"
-        image(File.join('..', 'Are We There Yet.ico')) if OS.windows? # retrieves it from installation directory on Windows
+        image APP_ICON if OS.windows? # retrieves it from installation directory on Windows
         on_swt_show {
           swt_widget.set_bounds 0, 0, @display.monitors.first.bounds.width, @display.monitors.first.bounds.height
         }
