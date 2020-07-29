@@ -3,9 +3,15 @@
 
 Simply enter tasks and see them reflected in the project progress Gantt Chart.
 
+### Downloads
+
+#### Windows
+
 [<img src="https://raw.githubusercontent.com/AndyObtiva/are-we-there-yet/master/are-we-there-yet-logo.svg" height=40 /> Download Are We There Yet? v1.1.0 for Windows (MSI Installer)](https://www.dropbox.com/s/phdpmr4bti43xq0/Are%20We%20There%20Yet-1.1.0.msi?dl=1)
 
 [![Are We There Yet Screenshot Windows](are-we-there-yet-screenshot-windows.png)](https://www.dropbox.com/s/phdpmr4bti43xq0/Are%20We%20There%20Yet-1.1.0.msi?dl=1)
+
+#### Mac
 
 [<img src="https://raw.githubusercontent.com/AndyObtiva/are-we-there-yet/master/are-we-there-yet-logo.svg" height=40 /> Download Are We There Yet? v1.1.0 for Mac (DMG File)](https://www.dropbox.com/s/a02iwtwx62jvhpx/Are%20We%20There%20Yet-1.1.0.dmg?dl=1)
 
