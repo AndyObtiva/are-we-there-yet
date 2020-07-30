@@ -1,42 +1,6 @@
 $LOAD_PATH.unshift(File.expand_path('..', __FILE__))
 $LOAD_PATH.unshift(File.expand_path('../..', __FILE__))
 
-require 'glimmer-dsl-swt'
-
-class AreWeThereYet
-  class Splash
-    include Glimmer
-
-    class << self
-      attr_reader :shell_proxy
-
-      def open
-        sync_exec {
-          @shell_proxy = shell(:no_trim, :on_top) {
-            minimum_size 128, 128
-            background :transparent
-            background_image File.expand_path(File.join('..', '..', 'are-we-there-yet-logo.png'), __FILE__)
-            cursor display.swt_display.get_system_cursor(swt(:cursor_appstarting))
-          }
-          @shell_proxy.open
-        }
-      end
-
-      def close
-        sync_exec {
-          @shell_proxy&.swt_widget&.close
-        }
-      end
-    end
-  end
-
-end
-
-Thread.new do
-  AreWeThereYet::Splash.open
-end
-
-
 require 'puts_debuggerer'
 require 'bundler/setup'
 Bundler.require

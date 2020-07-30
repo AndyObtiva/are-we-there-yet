@@ -1,3 +1,9 @@
-require_relative '../app/are_we_there_yet'
+require_relative '../app/views/are_we_there_yet/splash'
 
-AreWeThereYet.new.open
+Thread.new do
+  require_relative '../app/are_we_there_yet'
+  
+  AreWeThereYet.new.open
+end
+
+AreWeThereYet::Splash.open
