@@ -2,6 +2,7 @@
 
 Add miscellaneous tasks and issues here.
 
+- Default start date to that right after the last task in the project
 - Fix issue with selection/deletion on Windows
 - Add a today button to center Gantt Chart
 - Remove task via Gantt Chart GUI
