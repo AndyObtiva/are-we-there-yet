@@ -18,6 +18,7 @@ Glimmer::Config.import_swt_packages += [
 Glimmer::Config.logging_devices = [:stdout, :file, :syslog]
 # Glimmer::Config.logger.level = 'debug'
 # Glimmer::Config.logging_appender_options = Glimmer::Config.logging_appender_options.merge(async: false, auto_flushing: 1)
+# PutsDebuggerer.printer = ->(msg) {Glimmer::Config.logger.error(msg)}
 require 'views/are_we_there_yet/app_view'
 
 class AreWeThereYet

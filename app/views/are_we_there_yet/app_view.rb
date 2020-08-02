@@ -3,6 +3,7 @@ require 'models/are_we_there_yet/gantt_chart_settings'
 require 'views/are_we_there_yet/task_form'
 require 'views/are_we_there_yet/filter_form'
 require 'views/are_we_there_yet/task_table'
+require 'views/are_we_there_yet/simple_text_view'
 require 'views/are_we_there_yet/preferences_dialog'
 
 java_import 'java.util.Calendar'
@@ -105,8 +106,19 @@ class AreWeThereYet
               }
             }
           }
-          @task_table = task_table {
-            layout_data :fill, :fill, true, true
+          tab_folder {
+            tab_item {
+              text "Table View"
+              @task_table = task_table {
+                layout_data :fill, :fill, true, true
+              }
+            }
+            tab_item {
+              text "Simple Text View"
+              @simple_text_view = simple_text_view {
+                layout_data :fill, :fill, true, true
+              }
+            }
           }
           weights [13, 8, 11]
         }
