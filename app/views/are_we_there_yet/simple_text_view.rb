@@ -1,4 +1,5 @@
 require 'models/are_we_there_yet/task'
+require 'models/are_we_there_yet/simple_text_view_presenter'
 
 class AreWeThereYet
   class SimpleTextView
@@ -12,9 +13,9 @@ class AreWeThereYet
     ## Use before_body block to pre-initialize variables to use in body
     #
     #
-    # before_body {
-    # 
-    # }
+    before_body {
+      @presenter = SimpleTextViewPresenter
+    }
 
     ## Use after_body block to setup observers for widgets in body
     #
@@ -31,18 +32,10 @@ class AreWeThereYet
     body {
       # Replace example content below with custom widget content
       styled_text(:multi, :border, :h_scroll, :v_scroll) {              
-        text bind(Task, :list, read_only: true) { |tasks|
-          tasks.to_a.group_by(&:project_name).reduce({}) do |hash, project|
-            project_name, project_tasks = project
-            hash.merge(project_name => project_tasks.group_by(&:task_type))
-          end.map do |project_name, project_task_grouping|            
-            "# #{project_name}\n" + project_task_grouping.map do |task_type, tasks|
-              "\n## #{task_type}\n\n" + tasks.map do |task|
-                "- #{task.name}"
-              end.join("\n")
-            end.join("\n") + "\n"
-          end.join("\n")
-        }
+        text bind(@presenter, :text)
+#         line_get_style { |event|
+#           
+#         }
       }
     }
 

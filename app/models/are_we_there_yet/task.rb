@@ -262,6 +262,6 @@ class AreWeThereYet
       elsif duration_in_hours <= 62*24
         self.duration = "#{(duration_in_hours/24.0).to_i} days"
       end
-    end
+    end    
   end
 end
