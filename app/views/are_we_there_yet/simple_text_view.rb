@@ -30,10 +30,17 @@ class AreWeThereYet
     #
     body {
       # Replace example content below with custom widget content
-      styled_text(:multi) {              
+      styled_text(:multi, :border, :h_scroll, :v_scroll) {              
         text bind(Task, :list, read_only: true) { |tasks|
-          tasks.to_a.map do |task|
-            "- #{task.name}"
+          tasks.to_a.group_by(&:project_name).reduce({}) do |hash, project|
+            project_name, project_tasks = project
+            hash.merge(project_name => project_tasks.group_by(&:task_type))
+          end.map do |project_name, project_task_grouping|            
+            "# #{project_name}\n" + project_task_grouping.map do |task_type, tasks|
+              "\n## #{task_type}\n\n" + tasks.map do |task|
+                "- #{task.name}"
+              end.join("\n")
+            end.join("\n") + "\n"
           end.join("\n")
         }
       }
