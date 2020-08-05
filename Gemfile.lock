@@ -48,7 +48,7 @@ GEM
       glimmer-dsl-swt (>= 0.4.1, < 2.0.0)
     glimmer-cw-cdatetime-nebula (1.4.0.0)
       glimmer-dsl-swt (>= 0.3.1, < 2.0.0)
-    glimmer-dsl-swt (0.5.6)
+    glimmer-dsl-swt (0.6.0)
       glimmer (~> 0.10.1)
       jeweler (>= 2.3.9, < 3.0.0)
       logging (>= 2.3.0, < 3.0.0)
@@ -77,7 +77,7 @@ GEM
       rake
       rdoc
       semver2
-    jruby-jars (9.2.12.0)
+    jruby-jars (9.2.13.0)
     jruby-rack (1.1.21)
     jwt (2.2.1)
     little-plugger (1.1.4)
@@ -143,7 +143,7 @@ DEPENDENCIES
   activerecord-jdbcsqlite3-adapter (~> 52.6)
   glimmer-cs-gladiator
   glimmer-cw-cdatetime-nebula (~> 1.4.0.0)
-  glimmer-dsl-swt (~> 0.5.4)
+  glimmer-dsl-swt (~> 0.6.0)
   rspec
 
 BUNDLED WITH

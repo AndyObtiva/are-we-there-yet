@@ -1,4 +1,5 @@
 require 'models/are_we_there_yet/task'
+require 'models/are_we_there_yet/simple_text_view_presenter/blank_line_presenter'
 require 'models/are_we_there_yet/simple_text_view_presenter/project_presenter'
 require 'models/are_we_there_yet/simple_text_view_presenter/task_presenter'
 require 'models/are_we_there_yet/simple_text_view_presenter/task_type_presenter'
@@ -11,14 +12,14 @@ class AreWeThereYet
       end
       
       def presenter_list
-        grouped_task_list.map do |project_name, project_task_types|
+        grouped_task_list.map do |project_name, project_task_types|          
           project_presenter = ProjectPresenter.new(project_name)
-          [project_presenter] + project_task_types.map do |task_type, tasks|
+          [project_presenter, BlankLinePresenter.new] + project_task_types.map do |task_type, tasks|
             task_type_presenter = TaskTypePresenter.new(task_type, project_presenter)
-            [task_type_presenter] + tasks.map do |task|
+            [task_type_presenter, BlankLinePresenter.new] + tasks.map do |task|
               TaskPresenter.new(task, task_type_presenter)
-            end
-          end
+            end + [BlankLinePresenter.new]
+          end.flatten
         end.flatten
       end
       

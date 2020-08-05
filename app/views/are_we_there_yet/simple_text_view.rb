@@ -33,8 +33,23 @@ class AreWeThereYet
       # Replace example content below with custom widget content
       styled_text(:multi, :border, :h_scroll, :v_scroll) {              
         text bind(@presenter, :text)
-#         line_get_style { |event|
-#           
+        left_margin 5
+        right_margin 5
+        line_index = 0
+        style_ranges [
+          StyleRange.new.tap { |style|
+            style.start = 0
+            style.length = 50
+            style.fontStyle = swt(:bold)
+          }
+        ].to_java(StyleRange)
+#         on_line_get_style { |event|
+#           @presenter.presenter_list[line_index]&.line_get_style(event)
+#           line_index += 1
+#           event.styles.to_a.each do |style|
+#             pd event.widget.style_range = style
+#           end
+#           pd event.widget.style_ranges.size
 #         }
       }
     }

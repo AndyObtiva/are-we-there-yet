@@ -8,8 +8,11 @@ class AreWeThereYet
       end      
       
       def to_s
-        suffix = "\n" if @task_type_presenter.task_presenters.last == self
-        "- #{@task.name}#{suffix}"
+#         suffix = "\n" if @task_type_presenter.task_presenters.last == self
+        "- #{@task.name}" # #{suffix}"
+      end
+      
+      def line_get_style(event)
       end
     end
   end

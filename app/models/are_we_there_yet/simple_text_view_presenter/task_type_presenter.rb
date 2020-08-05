@@ -15,7 +15,10 @@ class AreWeThereYet
       end
       
       def to_s
-        "## #{@task_type}\n"
+        "## #{@task_type}"
+      end
+      
+      def line_get_style(event)
       end
     end
   end

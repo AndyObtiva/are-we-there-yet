@@ -14,7 +14,7 @@ class AreWeThereYet
           @shell_proxy = shell(:no_trim, :on_top) {
             minimum_size 128, 128                        
             background_image File.expand_path(File.join('..', '..', '..', '..', 'are-we-there-yet-logo.png'), __FILE__)
-            cursor display.swt_display.get_system_cursor(swt(:cursor_appstarting))
+            cursor :appstarting
           }
           @shell_proxy.open
         }
