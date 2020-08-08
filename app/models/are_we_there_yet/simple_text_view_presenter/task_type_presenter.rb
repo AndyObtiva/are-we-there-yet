@@ -18,7 +18,12 @@ class AreWeThereYet
         "## #{@task_type}"
       end
       
-      def line_get_style(event)
+      def style_range
+        StyleRange.new.tap { |style|
+          style.start = 0
+          style.length = to_s.size
+          style.fontStyle = swt(:normal)
+        }      
       end
     end
   end

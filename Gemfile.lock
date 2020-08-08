@@ -33,6 +33,8 @@ GEM
       optimist (~> 3.0)
     git (1.7.0)
       rchardet (~> 1.8)
+    git-glimmer (1.7.0)
+      rchardet (~> 1.8)
     github_api (0.16.0)
       addressable (~> 2.4.0)
       descendants_tracker (~> 0.0.4)
@@ -48,7 +50,8 @@ GEM
       glimmer-dsl-swt (>= 0.4.1, < 2.0.0)
     glimmer-cw-cdatetime-nebula (1.4.0.0)
       glimmer-dsl-swt (>= 0.3.1, < 2.0.0)
-    glimmer-dsl-swt (0.6.0)
+    glimmer-dsl-swt (0.6.1)
+      git-glimmer (= 1.7.0)
       glimmer (~> 0.10.1)
       jeweler (>= 2.3.9, < 3.0.0)
       logging (>= 2.3.0, < 3.0.0)
@@ -143,7 +146,7 @@ DEPENDENCIES
   activerecord-jdbcsqlite3-adapter (~> 52.6)
   glimmer-cs-gladiator
   glimmer-cw-cdatetime-nebula (~> 1.4.0.0)
-  glimmer-dsl-swt (~> 0.6.0)
+  glimmer-dsl-swt (~> 0.6.1)
   rspec
 
 BUNDLED WITH

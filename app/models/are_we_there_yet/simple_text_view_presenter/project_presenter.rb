@@ -17,19 +17,28 @@ class AreWeThereYet
         "# #{@project_name}"
       end
       
-      def line_get_style(event)
-        styles(event)      
-      end
+#       def line_get_style(event)
+#         styles(event)      
+#       end
+#       
+#       def styles(event)
+#         pd 'header', header: true
+#         text_style = TextStyle.new(font(height: 24).swt_font, color(:red).swt_color, color(:green).swt_color)
+#         style = StyleRange.new(text_style)
+#         pd style.start = event.lineOffset
+#         pd style.length = to_s.length
+#         style.fontStyle = swt(:bold)
+#         event.ranges = [style.start, style.length]
+#         event.styles = [style]
+#       end
+
       
-      def styles(event)
-        pd 'header', header: true
-        text_style = TextStyle.new(font(height: 24).swt_font, color(:red).swt_color, color(:green).swt_color)
-        style = StyleRange.new(text_style)
-        pd style.start = event.lineOffset
-        pd style.length = to_s.length
-        style.fontStyle = swt(:bold)
-        event.ranges = [style.start, style.length]
-        event.styles = [style]
+      def style_range
+        StyleRange.new.tap { |style|
+          style.start = 0
+          style.length = to_s.size
+          style.fontStyle = swt(:bold)
+        }      
       end
     end
   end

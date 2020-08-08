@@ -120,7 +120,7 @@ class AreWeThereYet
               layout_data(:fill, :top, true, true)
               text 'Start Date'
             }
-            @inputs[:start_at] = c_date_time(CDT::BORDER | CDT::COMPACT | CDT::DROP_DOWN | CDT::DATE_LONG) {
+            @inputs[:start_at] = c_date_time(CDT::BORDER | CDT::TAB_FIELDS | CDT::COMPACT | CDT::DROP_DOWN | CDT::DATE_LONG) {
               layout_data(:fill, :top, true, true)
               selection bind(@task, :start_at)
               on_key_pressed { |event|

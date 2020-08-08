@@ -36,13 +36,7 @@ class AreWeThereYet
         left_margin 5
         right_margin 5
         line_index = 0
-        style_ranges [
-          StyleRange.new.tap { |style|
-            style.start = 0
-            style.length = 50
-            style.fontStyle = swt(:bold)
-          }
-        ].to_java(StyleRange)
+        style_ranges bind(@presenter, :style_ranges)
 #         on_line_get_style { |event|
 #           @presenter.presenter_list[line_index]&.line_get_style(event)
 #           line_index += 1

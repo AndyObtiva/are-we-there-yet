@@ -11,9 +11,13 @@ class AreWeThereYet
         presenter_list.map(&:to_s).join("\n")
       end
       
+      def style_ranges
+        presenter_list.map(&:style_range).to_java(StyleRange)
+      end
+      
       def presenter_list
         grouped_task_list.map do |project_name, project_task_types|          
-          project_presenter = ProjectPresenter.new(project_name)
+          project_presenter = ProjectPresenter.new(project_name) # TODO pass them this presenter to rely on its information for offset of first character in each presenter
           [project_presenter, BlankLinePresenter.new] + project_task_types.map do |task_type, tasks|
             task_type_presenter = TaskTypePresenter.new(task_type, project_presenter)
             [task_type_presenter, BlankLinePresenter.new] + tasks.map do |task|
