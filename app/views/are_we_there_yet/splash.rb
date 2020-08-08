@@ -12,8 +12,19 @@ class AreWeThereYet
       def open
         sync_exec {
           @shell_proxy = shell(:no_trim, :on_top) {
-            minimum_size 128, 128                        
-            background_image File.expand_path(File.join('..', '..', '..', '..', 'are-we-there-yet-logo.png'), __FILE__)
+            minimum_size 128, 128
+            background rgb(33, 44, 186)
+            fill_layout {
+              margin_width 0
+              margin_height 0
+            }            
+            composite {
+              fill_layout {
+                margin_width 0
+                margin_height 0
+              }
+              background_image File.expand_path(File.join('..', '..', '..', '..', 'are-we-there-yet-logo.png'), __FILE__)
+            }
             cursor display.swt_display.get_system_cursor(swt(:cursor_appstarting))
           }
           @shell_proxy.open

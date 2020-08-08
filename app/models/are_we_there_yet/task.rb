@@ -70,10 +70,35 @@ class AreWeThereYet
           (1..24).map do |h|
             "#{h} hour#{'s' if h > 1}"
           end + 
-          (2..62).map do |d|
+          (2..31).map do |d|
             "#{d} days"
+          end + 
+          (5..26).map do |w|
+            "#{w} weeks"
+          end + 
+          (7..11).map do |m|
+            "#{m} months"
+          end + 
+          (1..2).map do |y|
+            "#{y} years"
           end
-      end    
+      end
+      
+      def duration_in_hours(duration)
+        value = duration.to_s
+        if value.include?('hour')
+          value = value.to_i
+        elsif value.include?('day')
+          value = value.to_i * 24
+        elsif value.include?('week')
+          value = value.to_i * 24 * 7
+        elsif value.include?('month')
+          value = value.to_i * 24 * 30
+        elsif value.include?('year')
+          value = value.to_i * 24 * 365
+        end
+        value.to_i
+      end
       
       def priority_filter_options
         ['', 'High', 'Medium', 'Low']
@@ -244,23 +269,21 @@ class AreWeThereYet
     end
         
     def duration_in_hours
-      value = duration.to_s
-      if value.include?('hour')
-        value = value.to_i
-      elsif value.include?('day')
-        value = value.to_i * 24
-      elsif value.include?('month')
-        value = value.to_i * 24 * 30
-      end
-      value.to_i
+      Task.duration_in_hours(duration)
     end
     
     def duration_time=(value)
       duration_in_hours = (value / (60.0 * 60)).to_i
       if duration_in_hours <= 24
         self.duration = "#{duration_in_hours} hour#{'s' if duration_in_hours > 1}"
-      elsif duration_in_hours <= 62*24
+      elsif duration_in_hours <= 31*24
         self.duration = "#{(duration_in_hours/24.0).to_i} days"
+      elsif duration_in_hours <= 26*7*24
+        self.duration = "#{(duration_in_hours/(7*24.0)).to_i} weeks"
+      elsif duration_in_hours <= 11*30*24
+        self.duration = "#{(duration_in_hours/(30*24.0)).to_i} months"
+      else
+        self.duration = "#{(duration_in_hours/(365*24.0)).to_i} years"
       end
     end
   end

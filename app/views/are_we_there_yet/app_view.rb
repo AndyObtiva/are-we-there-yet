@@ -94,6 +94,10 @@ class AreWeThereYet
             @gantt_chart = gantt_chart(GanttFlags::H_SCROLL_INFINITE, @gantt_chart_settings)
           }
           composite { |composite_proxy|
+            grid_layout {
+              margin_width 0
+              margin_height 0
+            }
             task_form {
               layout_data(:fill, :fill, true, true) {
                 minimum_height 120

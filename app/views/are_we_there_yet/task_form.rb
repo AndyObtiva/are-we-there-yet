@@ -53,7 +53,8 @@ class AreWeThereYet
             }
             grid_layout(1, true) {
               horizontal_spacing 0
-              #margin_width 0
+              margin_width 5
+              margin_height 5
             }
             @labels[:project_name] = label {
               layout_data(:fill, :top, true, true)
@@ -74,7 +75,8 @@ class AreWeThereYet
             }
             grid_layout(1, true) {
               horizontal_spacing 0
-              #margin_width 0
+              margin_width 5
+              margin_height 5
             }
             @labels[:task_type] = label {
               layout_data(:fill, :top, true, true)
@@ -94,7 +96,8 @@ class AreWeThereYet
             }
             grid_layout(1, true) {
               horizontal_spacing 0
-              #margin_width 0
+              margin_width 5
+              margin_height 5
             }
             @labels[:name] = label {
               layout_data(:fill, :top, true, true)
@@ -114,7 +117,8 @@ class AreWeThereYet
             }
             grid_layout(1, true) {
               horizontal_spacing 0
-              #margin_width 0
+              margin_width 5
+              margin_height 5
             }
             @labels[:start_at] = label {
               layout_data(:fill, :top, true, true)
@@ -134,7 +138,8 @@ class AreWeThereYet
             }
             grid_layout(1, true) {
               horizontal_spacing 0
-              #margin_width 0
+              margin_width 5
+              margin_height 5
             }
             @labels[:end_at] = label {
               layout_data(:fill, :top, true, true)
@@ -154,7 +159,8 @@ class AreWeThereYet
             }
             grid_layout(1, true) {
               horizontal_spacing 0
-              #margin_width 0
+              margin_width 5
+              margin_height 5
             }
             @labels[:duration] = label {
               layout_data(:fill, :top, true, true)
@@ -174,7 +180,8 @@ class AreWeThereYet
             }
             grid_layout(1, true) {
               horizontal_spacing 0
-              #margin_width 0
+              margin_width 5
+              margin_height 5
             }
             @labels[:priority] = label {
               layout_data(:fill, :top, true, true)
