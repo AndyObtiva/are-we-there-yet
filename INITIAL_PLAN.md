@@ -4,7 +4,7 @@
 
 ## Background
 
-For very simple projects, enterprise project management software is too large and complicated to setup and not conventient enough to use.
+For very simple projects, enterprise project management software is too large and complicated to setup and not convenient enough to use.
 
 Are We There Yet? aims to be an alternative that provides a quick "at a glance" view of multiple small projects and their progress of completion.
 
