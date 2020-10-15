@@ -127,7 +127,7 @@ class AreWeThereYet
         if filter_value
           @list = @list.select do |task|        
             value = task.start_at
-            filter_value.nil? ? true : value == filter_value
+            filter_value.nil? ? true : value >= filter_value
           end
         end
         
@@ -135,7 +135,7 @@ class AreWeThereYet
         if filter_value
           @list = @list.select do |task|
             value = task.end_at
-            filter_value.nil? ? true : value == filter_value
+            filter_value.nil? ? true : value <= filter_value
           end
         end
         

@@ -1,4 +1,4 @@
-  require 'models/are_we_there_yet/task'
+require 'models/are_we_there_yet/task'
 
 class AreWeThereYet  
   class TaskTable
@@ -44,12 +44,12 @@ class AreWeThereYet
         table_column {
           text 'Start Date'
           width CONFIG[:table_column_width_hint]
-          editor :c_date_time, CDT::BORDER | CDT::COMPACT | CDT::DROP_DOWN | CDT::DATE_LONG, property: :start_at
+          editor :c_date_drop_down, property: :start_at
         }
         table_column {
           text 'End Date'
           width CONFIG[:table_column_width_hint]
-          editor :c_date_time, CDT::BORDER | CDT::COMPACT | CDT::DROP_DOWN | CDT::DATE_LONG, property: :end_at
+          editor :c_date_drop_down, property: :end_at
         }
         table_column {
           text 'Duration (hours)'

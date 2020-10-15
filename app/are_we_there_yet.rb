@@ -2,7 +2,7 @@ $LOAD_PATH.unshift(File.expand_path('..', __FILE__))
 $LOAD_PATH.unshift(File.expand_path('../..', __FILE__))
 
 require 'puts_debuggerer'
-require 'bundler/setup'
+require 'bundler'
 Bundler.require
 
 # Load database content (or create it if it doesn't exist)
@@ -18,6 +18,7 @@ Glimmer::Config.import_swt_packages += [
 Glimmer::Config.logging_devices = [:stdout, :file, :syslog]
 # Glimmer::Config.logger.level = 'debug'
 # Glimmer::Config.logging_appender_options = Glimmer::Config.logging_appender_options.merge(async: false, auto_flushing: 1)
+
 require 'views/are_we_there_yet/app_view'
 
 class AreWeThereYet

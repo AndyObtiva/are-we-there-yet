@@ -122,7 +122,7 @@ class AreWeThereYet
               layout_data(:fill, :top, true, true)
               text 'Start Date'
             }
-            @inputs[:start_at_filter] = c_date_time(CDT::BORDER | CDT::COMPACT | CDT::DROP_DOWN | CDT::DATE_LONG) {
+            @inputs[:start_at_filter] = c_date_drop_down {
               layout_data(:fill, :top, true, true)
               selection bind(Task, :start_at_filter)
               on_key_pressed { |event|
@@ -143,7 +143,7 @@ class AreWeThereYet
               layout_data(:fill, :top, true, true)
               text 'End Date'
             }
-            @inputs[:end_at_filter] = c_date_time(CDT::BORDER | CDT::COMPACT | CDT::DROP_DOWN | CDT::DATE_LONG) {
+            @inputs[:end_at_filter] = c_date_drop_down {
               layout_data(:fill, :top, true, true)
               selection bind(Task, :end_at_filter)
               on_key_pressed { |event|

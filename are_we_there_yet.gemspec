@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["bin".freeze]
   s.authors = ["Andy Maleh".freeze]
-  s.date = "2020-08-08"
+  s.date = "2020-08-16"
   s.description = "Small Project Tracking Desktop App built with Glimmer".freeze
   s.email = "andy.am@gmail.com".freeze
   s.extra_rdoc_files = [
