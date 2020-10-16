@@ -3,6 +3,8 @@
 ## v1.2.0
 
 - Made Start Date and End Date Filters do Range Filtering
+- Project name filter now filters Gantt Chart too
+- Display event durations next to names in the Gantt Chart according to how to they show up in the table (days, weeks, months, etc...)
 - Upgraded to glimmer-dsl-swt 4.17.2.3
 - Upgraded to glimmer-cw-cdatetime-nebula 1.5.0.1.0
 

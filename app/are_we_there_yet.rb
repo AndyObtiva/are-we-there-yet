@@ -37,7 +37,7 @@ class AreWeThereYet
   def open
     sync_exec {
       @app_view = app_view # loads app view while splash screen is still showing
-      AreWeThereYet::Splash.close
+      AreWeThereYet::Splash.close      
       @app_view.open
     }
   end

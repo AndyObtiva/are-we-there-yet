@@ -149,6 +149,18 @@ class AreWeThereYet
       # tasks to use for chart
       def chart
         @chart = order(:start_at)
+        
+        filter = 'project_name_filter'
+        filter_value = send(filter)
+        filter_property = property_for_filter(filter)
+        if !filter_value.to_s.empty?
+          @chart = @chart.select do |task|
+            value = task.send(filter_property)
+            value.to_s.downcase.include?(filter_value.to_s.downcase)
+          end
+        end
+        
+        @chart
       end
       
       def chart=(new_chart)

@@ -23,7 +23,8 @@ class AreWeThereYet
     #
     #
     before_body {
-      Display.setAppName('Are We There Yet?')
+      @app_name = 'Are We There Yet?'
+      Display.setAppName(@app_name)
       Display.setAppVersion(VERSION)
       @display = display {
         on_about {
@@ -65,6 +66,9 @@ class AreWeThereYet
         end
       end
       observe(Task, :chart, &render_gantt_chart)
+      observe(Task, :project_name_filter) do |new_value|
+        Task.notify_observers(:chart)
+      end
       render_gantt_chart.call(Task.chart)
       @after_body_done = true
     }
@@ -76,7 +80,7 @@ class AreWeThereYet
       shell {
         # Replace example content below with custom shell content
         minimum_size 750, 750
-        text "Are We There Yet?"
+        text @app_name
         image APP_ICON if OS.windows? # retrieves it from installation directory on Windows
         on_swt_show {
           swt_widget.set_bounds 0, 0, @display.monitors.first.bounds.width, @display.monitors.first.bounds.height
@@ -120,7 +124,7 @@ class AreWeThereYet
     def display_about_dialog
       message_box = MessageBox.new(swt_widget)
       message_box.setText("About")
-      message = "Are We There Yet - App View #{VERSION}"
+      message = "Are We There Yet? - Version #{VERSION}"
       message += LICENSE
       message_box.setMessage(message)
       message_box.open
@@ -168,7 +172,7 @@ class AreWeThereYet
       start_date_time.set(task.start_at.year, task.start_at.month - 1, task.start_at.day, task.start_at.hour, task.start_at.min, task.start_at.sec)
       end_date_time = Calendar.getInstance # TODO move to Task class
       end_date_time.set(task.end_at.year, task.end_at.month - 1, task.end_at.day, task.end_at.hour, task.end_at.min, task.end_at.sec)         
-      gantt_event = GanttEvent.new(@gantt_chart.swt_widget, task.name, start_date_time, end_date_time, task.finished? ? 100 : 0) # TODO support percent complete
+      gantt_event = GanttEvent.new(@gantt_chart.swt_widget, "#{task.name} (#{task.duration})", start_date_time, end_date_time, task.finished? ? 100 : 0) # TODO support percent complete
       gantt_event.data = task
       gantt_event
     end

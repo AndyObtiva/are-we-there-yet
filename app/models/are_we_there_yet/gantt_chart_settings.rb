@@ -1,3 +1,5 @@
+require_relative 'custom_tool_tip_content_replacer'
+
 # TODO move to models 
 java_import 'org.eclipse.nebula.widgets.ganttchart.ISettings'
 java_import 'org.eclipse.nebula.widgets.ganttchart.AbstractSettings'
@@ -31,11 +33,15 @@ class AreWeThereYet
     end
     
     def getTextDisplayFormat
-      "#name# (#days#d)"
+      "#name#"
     end
     
     def getDefaultAdvancedTooltipText
-      "\\cePlanned: #sd# - #ed# (#days# day(s))\n\\c100100100"
+      "\\cePlanned: #sd# - #ed# (#days#)\n\\c100100100"
+    end
+    
+    def getToolTipContentReplacer
+      CustomToolTipContentReplacer.instance
     end
     
     def configure_app_initial_settings
