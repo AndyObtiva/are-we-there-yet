@@ -1,15 +1,3 @@
-require 'glimmer/rake_task'
-
-## Use the following configuration if you would like to customize javapackager
-## arguments for `glimmer package` command.
-#
-Glimmer::RakeTask::Package.javapackager_extra_args =
- " -native #{ENV['NATIVE'] || ('dmg' if OS.mac?) || ('msi' if OS.windows?)}"
-#   " -BlicenseType=" +
-#   " -Bmac.CFBundleIdentifier=" +
-#   " -Bmac.category=" +
-#   " -Bmac.signing-key-developer-id-app="
-
 require 'rubygems'
 require 'bundler'
 begin
@@ -19,6 +7,7 @@ rescue Bundler::BundlerError => e
   $stderr.puts "Run `bundle install` to install missing gems"
   exit e.status_code
 end
+require 'glimmer/launcher'
 require 'rake'
 
 require 'jeweler'
@@ -31,9 +20,20 @@ Jeweler::Tasks.new do |gem|
   gem.description = %Q{Small Project Tracking Desktop App built with Glimmer}
   gem.email = "andy.am@gmail.com"
   gem.authors = ["Andy Maleh"]
-  gem.files = Dir['Rakefile', 'Gemfile', 'Gemfile.lock', '*.png', 'Jars.lock', 'README.md', 'LICENSE.txt', 'VERSION', 'bin/**/*', 'app/**/*', 'vendor/**/*', 'icons/**/*', 'package/**/*']
+  gem.files = Dir['Rakefile', 'Gemfile', 'Gemfile.lock', '*.png', '*.gif', 'Jars.lock', 'README.md', 'LICENSE.txt', 'VERSION', 'bin/**/*', 'app/**/*', 'vendor/**/*', 'icons/**/*', 'package/**/*']
   gem.require_paths = ['bin']
   gem.executables = []
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
+
+## Use the following configuration if you would like to customize javapackager
+## arguments for `glimmer package` command.
+#
+require 'glimmer/rake_task'
+Glimmer::RakeTask::Package.javapackager_extra_args =
+ " -native #{ENV['NATIVE'] || ('dmg' if OS.mac?) || ('msi' if OS.windows?)}"
+#   " -BlicenseType=" +
+#   " -Bmac.CFBundleIdentifier=" +
+#   " -Bmac.category=" +
+#   " -Bmac.signing-key-developer-id-app="

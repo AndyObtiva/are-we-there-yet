@@ -16,7 +16,7 @@ Warbler::Config.new do |config|
   config.dirs = %w(app config db lib script bin docs fonts icons images package sounds videos vendor)
 
   # Additional files/directories to include, above those in config.dirs
-  config.includes = FileList['LICENSE.txt', 'VERSION', 'are-we-there-yet-logo.png']
+  config.includes = FileList['LICENSE.txt', 'VERSION', 'are-we-there-yet-logo.png', 'are-we-there-yet-splash.gif']
 
   # Additional files/directories to exclude
   # config.excludes = FileList["lib/tasks/*"]

@@ -61,3 +61,4 @@ packages
 log
 
 *.sqlite3
+vendor/jars
