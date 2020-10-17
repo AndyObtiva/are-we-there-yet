@@ -7,9 +7,9 @@ Simply enter tasks and see them reflected in the project progress Gantt Chart.
 
 #### Windows
 
-[<img src="https://raw.githubusercontent.com/AndyObtiva/are-we-there-yet/master/are-we-there-yet-logo.svg" height=40 /> Download Are We There Yet? v1.1.1 for Windows (MSI Installer)](https://www.dropbox.com/s/wcoadkoxxbgrv2f/Are%20We%20There%20Yet-1.1.1.msi?dl=1)
+[<img src="https://raw.githubusercontent.com/AndyObtiva/are-we-there-yet/master/are-we-there-yet-logo.svg" height=40 /> Download Are We There Yet? v1.2.0 for Windows (MSI Installer)](https://www.dropbox.com/s/2ifeffkgzhbrgns/Are%20We%20There%20Yet-1.2.0.msi?dl=1)
 
-[![Are We There Yet Screenshot Windows](are-we-there-yet-screenshot-windows.png)](https://www.dropbox.com/s/wcoadkoxxbgrv2f/Are%20We%20There%20Yet-1.1.1.msi?dl=1)
+[![Are We There Yet Screenshot Windows](are-we-there-yet-screenshot-windows.png)](https://www.dropbox.com/s/2ifeffkgzhbrgns/Are%20We%20There%20Yet-1.2.0.msi?dl=1)
 
 #### Mac
 
@@ -33,8 +33,8 @@ Planned Releases:
 - [v0.7.0 (Alpha)](https://github.com/AndyObtiva/are-we-there-yet/projects/1?card_filter_query=milestone%3A%22v0.7.0+%28Alpha%29%22) on 2020-07-15 ([Download Here](https://www.dropbox.com/s/a8pl4a7c6d8prkq/Are%20We%20There%20Yet-0.7.0.dmg?dl=1))
 - [v1.0.0 (MVP)](https://github.com/AndyObtiva/are-we-there-yet/projects/1?card_filter_query=milestone%3A%22v1.0.0+%28MVP%29%22) on 2020-07-19 ([Download Here](https://www.dropbox.com/s/p6txqnpwc3trh8f/Are%20We%20There%20Yet-1.0.0.dmg?dl=1))
 - [v1.1.0 (Windows)](https://github.com/AndyObtiva/are-we-there-yet/projects/1?card_filter_query=milestone%3A%22v1.1.0+%28Windows%29%22) on 2020-07-27 ([Download Windows MSI Here](https://www.dropbox.com/s/phdpmr4bti43xq0/Are%20We%20There%20Yet-1.1.0.msi?dl=1)) ([Download Mac DMG Here](https://www.dropbox.com/s/a02iwtwx62jvhpx/Are%20We%20There%20Yet-1.1.0.dmg?dl=1))
-- v1.1.1 on 2020-08-07 ([Download Windows MSI Here](https://www.dropbox.com/s/wcoadkoxxbgrv2f/Are%20We%20There%20Yet-1.1.1.msi?dl=1)) ([Download Mac DMG Here](https://www.dropbox.com/s/0vj2iiejnnidunm/Are%20We%20There%20Yet-1.1.1.dmg?dl=1))
-- v1.2.0 on 2020-10-16 ([Download Mac DMG Here](https://www.dropbox.com/s/rmrv54gc3irorwt/Are%20We%20There%20Yet-1.2.0.dmg?dl=1))
+- [v1.1.1](CHANGELOG.md) on 2020-08-07 ([Download Windows MSI Here](https://www.dropbox.com/s/wcoadkoxxbgrv2f/Are%20We%20There%20Yet-1.1.1.msi?dl=1)) ([Download Mac DMG Here](https://www.dropbox.com/s/0vj2iiejnnidunm/Are%20We%20There%20Yet-1.1.1.dmg?dl=1))
+- [v1.2.0](CHANGELOG.md) on 2020-10-16 ([Download Windows MSI Here](https://www.dropbox.com/s/2ifeffkgzhbrgns/Are%20We%20There%20Yet-1.2.0.msi?dl=1)) ([Download Mac DMG Here](https://www.dropbox.com/s/rmrv54gc3irorwt/Are%20We%20There%20Yet-1.2.0.dmg?dl=1))
 
 ### License
 
