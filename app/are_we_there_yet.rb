@@ -19,6 +19,14 @@ Glimmer::Config.logging_devices = [:stdout, :file, :syslog]
 # Glimmer::Config.logger.level = 'debug'
 # Glimmer::Config.logging_appender_options = Glimmer::Config.logging_appender_options.merge(async: false, auto_flushing: 1)
 
+Glimmer::SWT::WidgetProxy::DEFAULT_INITIALIZERS['c_date'] = Glimmer::SWT::WidgetProxy::DEFAULT_INITIALIZERS['c_date_compact'] = Glimmer::SWT::WidgetProxy::DEFAULT_INITIALIZERS['c_date_spinner'] = Glimmer::SWT::WidgetProxy::DEFAULT_INITIALIZERS['c_date_drop_down'] = lambda do |widget|
+  has_pattern_style = %w[time_short time_medium date_short date_medium date_long].reduce(false) {|result, style| result || widget.get_data('proxy').has_style?(style)}
+  unless has_pattern_style
+    widget.format = Glimmer::SWT::CDTProxy[:date_short]
+    widget.pattern = 'yyyy-MM-dd'
+  end
+end
+
 require 'views/are_we_there_yet/app_view'
 
 class AreWeThereYet

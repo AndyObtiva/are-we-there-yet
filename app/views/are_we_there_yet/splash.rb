@@ -12,7 +12,8 @@ class AreWeThereYet
       def open
         sync_exec {
           @splash_image = image(File.expand_path(File.join('..', '..', '..', '..', 'are-we-there-yet-splash.gif'), __FILE__)).scale_to(118, 118)
-          @shell_proxy = shell(:no_trim, :on_top) {
+          @shell_styles = OS.windows? ? [swt(:no_resize)] : [:no_trim, :on_top]
+          @shell_proxy = shell(*@shell_styles) {
             minimum_size 128, 128
 #             background rgb(33, 44, 186)
             background :white

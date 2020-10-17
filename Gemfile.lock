@@ -52,7 +52,7 @@ GEM
       glimmer-dsl-swt (>= 4.17.2.0, < 5.0.0.0)
     glimmer-cw-cdatetime-nebula (1.5.0.1.0)
       glimmer-dsl-swt (>= 4.17.2.0, < 5.0.0.0)
-    glimmer-dsl-swt (4.17.2.3)
+    glimmer-dsl-swt (4.17.2.4)
       git-glimmer (= 1.7.0)
       glimmer (~> 1.0.1)
       logging (>= 2.3.0, < 3.0.0)
@@ -180,7 +180,7 @@ DEPENDENCIES
   activerecord-jdbcsqlite3-adapter (~> 52.6)
   glimmer-cs-gladiator
   glimmer-cw-cdatetime-nebula (~> 1.5.0.1.0)
-  glimmer-dsl-swt (~> 4.17.2.3)
+  glimmer-dsl-swt (~> 4.17.2.4)
   jeweler
   rspec
   warbler
