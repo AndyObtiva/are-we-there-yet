@@ -1,4 +1,4 @@
-# <img src="https://raw.githubusercontent.com/AndyObtiva/are-we-there-yet/master/are-we-there-yet-logo.svg" height=85 /> Are We There Yet? (Version 1.2.0)
+gi# <img src="https://raw.githubusercontent.com/AndyObtiva/are-we-there-yet/master/are-we-there-yet-logo.svg" height=85 /> Are We There Yet? (Version 1.2.0)
 ## A tool that helps you learn when your small projects will finish
 
 Simply enter tasks and see them reflected in the project progress Gantt Chart.

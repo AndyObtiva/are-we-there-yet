@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.2.1
+
+- Allow setting an exact End Date outside the range of possible values via the duration combo
+
 ## v1.2.0
 
 - Made Start Date and End Date Filters do Range Filtering

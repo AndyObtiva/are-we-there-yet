@@ -87,17 +87,17 @@ class AreWeThereYet
       def duration_in_hours(duration)
         value = duration.to_s
         if value.include?('hour')
-          value = value.to_i
+          value = value.to_f
         elsif value.include?('day')
-          value = value.to_i * 24
+          value = value.to_f * 24
         elsif value.include?('week')
-          value = value.to_i * 24 * 7
+          value = value.to_f * 24 * 7
         elsif value.include?('month')
-          value = value.to_i * 24 * 30
+          value = value.to_f * 24 * 30
         elsif value.include?('year')
-          value = value.to_i * 24 * 365
+          value = value.to_f * 24 * 365
         end
-        value.to_i
+        value.to_f
       end
       
       def priority_filter_options
@@ -257,7 +257,7 @@ class AreWeThereYet
         self.start_at = calculated_start_at
       else
         calculated_duration_time = value - start_at
-        self.duration_time = calculated_duration_time
+        self.set_duration_time(calculated_duration_time, approximate: false)
       end
       notify_observers(:end_date)      
     end
@@ -271,10 +271,11 @@ class AreWeThereYet
       end_at&.strftime('%Y-%m-%d')
     end
     
-    def duration=(value)
+    def duration=(value, notify_dependencies: true)
       super(value)
-      notify_observers(:end_at)
+      notify_observers(:end_at) if notify_dependencies
     end
+    alias set_duration duration= # alias needed when passing extra options
     
     def duration_time
       duration_in_hours * 60 * 60
@@ -284,19 +285,44 @@ class AreWeThereYet
       Task.duration_in_hours(duration)
     end
     
-    def duration_time=(value)
+    def duration_time=(value, approximate: true)
       duration_in_hours = (value / (60.0 * 60)).to_i
       if duration_in_hours <= 24
         self.duration = "#{duration_in_hours} hour#{'s' if duration_in_hours > 1}"
       elsif duration_in_hours <= 31*24
-        self.duration = "#{(duration_in_hours/24.0).to_i} days"
+        duration_value = duration_in_hours/24.0
+        if approximate
+          duration_value = duration_value.to_i
+          self.duration = "#{duration_value} days"
+        else
+          self.set_duration("#{duration_value} days", notify_dependencies: false)
+        end
       elsif duration_in_hours <= 26*7*24
-        self.duration = "#{(duration_in_hours/(7*24.0)).to_i} weeks"
+        duration_value = duration_in_hours/(7*24.0)
+        if approximate
+          duration_value = duration_value.to_i
+          self.duration = "#{duration_value} weeks"
+        else
+          self.set_duration("#{duration_value} weeks", notify_dependencies: false)
+        end
       elsif duration_in_hours <= 11*30*24
-        self.duration = "#{(duration_in_hours/(30*24.0)).to_i} months"
+        duration_value = duration_in_hours/(30*24.0)
+        if approximate
+          duration_value = duration_value.to_i
+          self.duration = "#{duration_value} months"
+        else
+          self.set_duration("#{duration_value} months", notify_dependencies: false)
+        end
       else
-        self.duration = "#{(duration_in_hours/(365*24.0)).to_i} years"
+        duration_value = duration_in_hours/(365*24.0)        
+        if approximate
+          duration_value = duration_value.to_i
+          self.duration = "#{duration_value} years"
+        else
+          self.set_duration("#{duration_value} years", notify_dependencies: false)
+        end
       end
     end
+    alias set_duration_time duration_time= # alias needed when passing extra options
   end
 end
