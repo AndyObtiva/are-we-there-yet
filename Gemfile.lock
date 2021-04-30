@@ -122,7 +122,7 @@ GEM
       tty-prompt
     rchardet (1.8.0)
     rdoc (6.2.1)
-    rexml (3.2.4)
+    rexml (3.2.5)
     rouge (3.24.0)
     rspec (3.9.0)
       rspec-core (~> 3.9.0)
