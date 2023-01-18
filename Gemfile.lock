@@ -116,7 +116,7 @@ GEM
       jar-dependencies (>= 0.1.7)
     puts_debuggerer (0.10.2)
       awesome_print (~> 1.8.0)
-    rack (2.2.3)
+    rack (2.2.6.2)
     rake (13.0.1)
     rake-tui (0.2.3)
       tty-prompt
